@@ -21,7 +21,7 @@ void ATLVPlayerController::BeginPlay()
 	check(TLVContext);
 
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
-	check(Subsystem);
+	if (!Subsystem) return;
 	Subsystem->AddMappingContext(TLVContext, 0);
 
 	bShowMouseCursor = true;

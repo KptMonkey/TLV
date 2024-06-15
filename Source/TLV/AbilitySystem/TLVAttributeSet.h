@@ -4,8 +4,35 @@
 
 #include "CoreMinimal.h"
 #include "AttributeSet.h"
+#include "AbilitySystemComponent.h"
 #include "TLVAttributeSet.generated.h"
 
+#define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
+GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
+GAMEPLAYATTRIBUTE_VALUE_GETTER(PropertyName) \
+GAMEPLAYATTRIBUTE_VALUE_SETTER(PropertyName) \
+GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
+
+
+USTRUCT()
+struct FEffectProperties
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	TObjectPtr<UAbilitySystemComponent> SourceASC = nullptr;
+	UPROPERTY()
+	TObjectPtr<AActor> SourceAvatarActor = nullptr;
+	UPROPERTY()
+	TObjectPtr<AController> SourceController = nullptr;;
+	UPROPERTY()
+	TObjectPtr<UAbilitySystemComponent> TargetASC = nullptr;
+	UPROPERTY()
+	TObjectPtr<AActor> TargetAvatarActor = nullptr;
+	UPROPERTY()
+	TObjectPtr<AController> TargetController = nullptr;
+	FGameplayEffectContextHandle GameplayEffectContextHandle = {};
+};
 /**
  * 
  */
@@ -13,5 +40,25 @@ UCLASS()
 class TLV_API UTLVAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
-	
+public:
+	UTLVAttributeSet();
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+	virtual void PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data) override;
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health, Category = "Vital Attributes")
+	FGameplayAttributeData Health;
+	ATTRIBUTE_ACCESSORS(UTLVAttributeSet, Health);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxHealth, Category = "Vital Attributes")
+	FGameplayAttributeData MaxHealth;
+	ATTRIBUTE_ACCESSORS(UTLVAttributeSet, MaxHealth);
+
+	UFUNCTION()
+	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;
+
+	UFUNCTION()
+	void OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth) const;
+private:
+	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& EffectProperties);
 };

@@ -13,6 +13,11 @@ ATLVBaseCharacter::ATLVBaseCharacter()
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
+UAbilitySystemComponent* ATLVBaseCharacter::GetAbilitySystemComponent() const
+{
+	return AbilitySystemComponent;
+}
+
 // Called when the game starts or when spawned
 void ATLVBaseCharacter::BeginPlay()
 {

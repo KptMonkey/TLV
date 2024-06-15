@@ -15,5 +15,8 @@ class TLV_API ATLVCharacter : public ATLVBaseCharacter
 	GENERATED_BODY()
 public:
 	ATLVCharacter();
-	
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+private:
+	void InitAbilityComponent();
 };

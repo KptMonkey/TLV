@@ -14,5 +14,6 @@ class TLV_API ATLVEnemy : public ATLVBaseCharacter
 public:
 	// Sets default values for this character's properties
 	ATLVEnemy();
+	virtual void BeginPlay() override;
 
 };
