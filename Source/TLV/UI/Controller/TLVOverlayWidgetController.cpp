@@ -1,23 +1,31 @@
-﻿// Copyright Druid Mechanics
-
-
+﻿
 #include "TLVOverlayWidgetController.h"
 
+#include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
 #include "TLV/AbilitySystem/TLVAttributeSet.h"
 
 void UTLVOverlayWidgetController::BroadcastInitialValues()
 {
-    const UTLVAttributeSet* AuraAttributeSet = CastChecked<UTLVAttributeSet>(AttributeSet);
+    auto const TLVAttributeSet = CastChecked<UTLVAttributeSet>(AttributeSet);
 
-    OnHealthChanged.Broadcast(AuraAttributeSet->GetHealth());
-    OnMaxHealthChanged.Broadcast(AuraAttributeSet->GetMaxHealth());	
+    OnHealthChanged.Broadcast(TLVAttributeSet->GetHealth());
+    OnMaxHealthChanged.Broadcast(TLVAttributeSet->GetMaxHealth());	
 }
 
 void UTLVOverlayWidgetController::BindCallbacksToDependencies()
 {
     const UTLVAttributeSet* TLVAttributeSet = CastChecked<UTLVAttributeSet>(AttributeSet);
     AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(TLVAttributeSet->GetHealthAttribute()).AddUObject(this, &UTLVOverlayWidgetController::HealthChanged);    
-    AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(TLVAttributeSet->GetMaxHealthAttribute()).AddUObject(this, &UTLVOverlayWidgetController::MaxHealthChanged);    
+    AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(TLVAttributeSet->GetMaxHealthAttribute()).AddUObject(this, &UTLVOverlayWidgetController::MaxHealthChanged);
+    Cast<UTLVAbilitySystemComponent>(AbilitySystemComponent)->EffectAssetTags.AddLambda(
+    [](FGameplayTagContainer const& TagContainer)
+    {
+        for (auto const& Tag : TagContainer)
+        {
+		    GEngine->AddOnScreenDebugMessage(0, 4, FColor::Black, Tag.ToString());
+        }
+    }
+    );
 }
 
 void UTLVOverlayWidgetController::HealthChanged(FOnAttributeChangeData const& Data) const

@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
+#include "TLV/Input/TLVInputConfig.h"
 #include "TLVPlayerController.generated.h"
 
 class UInputMappingContext;
@@ -30,5 +32,13 @@ private:
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> MoveAction;
 
+	void AbilityInputTagPressed(FGameplayTag InputTag);
+	void AbilityInputTagReleased(FGameplayTag InputTag);
+	void ABilityInputTagHeld(FGameplayTag InputTag);
 	void Move(const FInputActionValue& InputActionValue);
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TObjectPtr<UTLVInputConfig> InputConfig;
+	UPROPERTY()
+	TObjectPtr<UTLVAbilitySystemComponent> TLVAbilitySystemComponent;
+	TObjectPtr<UTLVAbilitySystemComponent> GetASC();
 };

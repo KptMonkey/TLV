@@ -20,7 +20,13 @@ ATLVEnemy::ATLVEnemy()
 void ATLVEnemy::BeginPlay()
 {
 	Super::BeginPlay();
+	InitAbilityComponent();
+}
+
+void ATLVEnemy::InitAbilityComponent()
+{
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	Cast<UTLVAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
 }
 
 

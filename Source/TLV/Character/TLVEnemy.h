@@ -15,5 +15,7 @@ public:
 	// Sets default values for this character's properties
 	ATLVEnemy();
 	virtual void BeginPlay() override;
+private:
+	virtual void InitAbilityComponent() override;
 
 };

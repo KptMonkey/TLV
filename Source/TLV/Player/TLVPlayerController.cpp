@@ -3,8 +3,10 @@
 
 #include "TLVPlayerController.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
+#include "TLV/Input/TLVInputComponent.h"
 
 ATLVPlayerController::ATLVPlayerController()
 {
@@ -23,10 +25,7 @@ void ATLVPlayerController::BeginPlay()
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 	if (!Subsystem) return;
 	Subsystem->AddMappingContext(TLVContext, 0);
-
-	bShowMouseCursor = true;
-	DefaultMouseCursor = EMouseCursor::Default;
-
+	
 	FInputModeGameAndUI InputModeData;
 	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
 	InputModeData.SetHideCursorDuringCapture(false);
@@ -35,11 +34,24 @@ void ATLVPlayerController::BeginPlay()
 void ATLVPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
-	Super::SetupInputComponent();
+}
 
-	UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
+void ATLVPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
+{
+	
+}
 
-	EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ATLVPlayerController::Move);
+void ATLVPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
+{
+	if (!GetASC()) return;
+	GetASC()->AbilityInputTagReleasd(InputTag);
+	
+}
+
+void ATLVPlayerController::ABilityInputTagHeld(FGameplayTag InputTag)
+{
+	if (!GetASC()) return;
+	GetASC()->AbilityInputTagHeld(InputTag);
 }
 
 void ATLVPlayerController::Move(const FInputActionValue& InputActionValue)
@@ -56,4 +68,13 @@ void ATLVPlayerController::Move(const FInputActionValue& InputActionValue)
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
 	}
+}
+
+TObjectPtr<UTLVAbilitySystemComponent> ATLVPlayerController::GetASC()
+{
+	if (!TLVAbilitySystemComponent)
+	{
+		TLVAbilitySystemComponent = Cast<UTLVAbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn<APawn>()));
+	}
+	return TLVAbilitySystemComponent;
 }

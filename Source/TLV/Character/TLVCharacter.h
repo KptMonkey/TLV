@@ -4,6 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "TLVBaseCharacter.h"
+#include "Abilities/GameplayAbility.h"
+#include "TLV/Actor/TLVProjectileWeapon.h"
+#include "TLV/Assets/TLVDataAssetInputConfig.h"
 #include "TLVCharacter.generated.h"
 
 /**
@@ -17,6 +20,20 @@ public:
 	ATLVCharacter();
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
+	void TraceUnderCrosshair(FHitResult& TraceHitResult);
+	void Tick(float DeltaSeconds) override;
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	UPROPERTY(BlueprintReadWrite, Replicated)
+	FHitResult TraceHitResult;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Combat | Projectile Weapon")
+	TObjectPtr<ATLVProjectileWeapon> ProjectileWeapon;
+	UPROPERTY(ReplicatedUsing = OnRep_DefendsBiteAttempt)
+	bool bDefendsBiteAttempt = false;
+	UFUNCTION()
+	void OnRep_DefendsBiteAttempt();
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 private:
-	void InitAbilityComponent();
+	virtual void InitAbilityComponent() override;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input", meta = (AllowPrivateAccess=true))
+	TObjectPtr<UTLVDataAssetInputConfig> InputConfigDataAsset;
 };
