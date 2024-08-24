@@ -19,6 +19,10 @@ struct FTLVInputActionConfig
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TObjectPtr<UInputAction> InputAction;
+
+	bool IsValid() const {
+		return InputTag.IsValid() && InputAction;
+	}
 };
 
 /**
@@ -35,4 +39,7 @@ public:
 	TArray<FTLVInputActionConfig> NativeInputActions;
 
 	TObjectPtr<UInputAction> FindNativeInputActionByTag(FGameplayTag const& GameplayTag);
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (TitleProperty= "InputTag"))
+	TArray<FTLVInputActionConfig> AbilityInputActions;
 };

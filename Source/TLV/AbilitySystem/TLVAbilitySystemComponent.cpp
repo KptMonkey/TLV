@@ -76,6 +76,22 @@ void UTLVAbilitySystemComponent::TryActivateGameplayAbility()
 	}
 }
 
+void UTLVAbilitySystemComponent::OnAbilityInputPressed(FGameplayTag const& InputTag)
+{
+	if (!InputTag.IsValid()) return;
+
+	for (auto const AbilitySpec : GetActivatableAbilities())
+	{
+		if (!AbilitySpec.DynamicAbilityTags.HasTag(InputTag)) continue;
+
+		TryActivateAbility(AbilitySpec.Handle);
+	}
+}
+
+void UTLVAbilitySystemComponent::OnAbilityInputReleased(FGameplayTag const& InputTag)
+{
+}
+
 void UTLVAbilitySystemComponent::EffectApplied(UAbilitySystemComponent* ASC,
                                                FGameplayEffectSpec const& GameplayEffectSpec, FActiveGameplayEffectHandle ActiveGameplayEffectHandle)
 {

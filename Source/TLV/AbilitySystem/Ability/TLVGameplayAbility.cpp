@@ -30,3 +30,13 @@ void UTLVGameplayAbility::OnGiveAbility(const FGameplayAbilityActorInfo* ActorIn
 		}
 	}
 }
+
+UTLVCombatComponent* UTLVGameplayAbility::GetCombatComponentFromActorInfo() const
+{
+	return GetAvatarActorFromActorInfo()->FindComponentByClass<UTLVCombatComponent>();
+}
+
+UTLVAbilitySystemComponent* UTLVGameplayAbility::GetTLVAbilitySystemComponentFromActorInfo() const
+{
+	return Cast<UTLVAbilitySystemComponent>(CurrentActorInfo->AbilitySystemComponent);
+}

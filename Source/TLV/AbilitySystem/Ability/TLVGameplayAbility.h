@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/GameplayAbility.h"
+#include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
+#include "TLV/Component/Combat/TLVCombatComponent.h"
 #include "TLVGameplayAbility.generated.h"
 
 UENUM(BlueprintType)
@@ -24,6 +26,10 @@ protected:
 	virtual void OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec) override;
 	UPROPERTY(EditDefaultsOnly, Category="TLVAbility")
 	ETLVAbilityActivationPolicy AbilityActivationPolicy = ETLVAbilityActivationPolicy::OnTriggered;
+	UFUNCTION(BlueprintPure, Category="TLVAbility")
+	UTLVCombatComponent* GetCombatComponentFromActorInfo() const;
+	UFUNCTION(BlueprintPure, Category="TLVAbility")
+	UTLVAbilitySystemComponent* GetTLVAbilitySystemComponentFromActorInfo() const;
 public:
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	FGameplayTag StartupInputTag;

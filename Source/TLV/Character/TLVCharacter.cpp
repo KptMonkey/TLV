@@ -24,6 +24,8 @@ ATLVCharacter::ATLVCharacter()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
+
+	HeroCombatComponent = CreateDefaultSubobject<UTLVHeroCombatComponent>("CombatComponent");
 }
 
 void ATLVCharacter::PossessedBy(AController* NewController)
@@ -113,6 +115,9 @@ void ATLVCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	check(SubSystem);
 	SubSystem->AddMappingContext(InputConfigDataAsset->DefaultMappingContext, 0);
 	auto TLVInputComponent = CastChecked<UTLVInputComponent>(PlayerInputComponent);
+
+	TLVInputComponent->BindAbilityInputAction(InputConfigDataAsset, this, &ThisClass::Input_AbilityInputPressed, &ThisClass::Input_AbilityInputReleased);
+	
 }
 
 void ATLVCharacter::InitAbilityComponent()
@@ -136,4 +141,18 @@ void ATLVCharacter::InitAbilityComponent()
 
 	auto const TLVASC = CastChecked<UTLVAbilitySystemComponent>(AbilitySystemComponent);
 	TLVASC->AddCharacterAbilities(StartupAbilities);
+}
+
+void ATLVCharacter::Input_AbilityInputPressed(FGameplayTag InputTag)
+{
+	auto const TLVASC = Cast<UTLVAbilitySystemComponent>(AbilitySystemComponent);
+	TLVASC->OnAbilityInputPressed(InputTag);
+
+}
+
+void ATLVCharacter::Input_AbilityInputReleased(FGameplayTag InputTag)
+{
+	auto const TLVASC = Cast<UTLVAbilitySystemComponent>(AbilitySystemComponent);
+	TLVASC->OnAbilityInputReleased(InputTag);
+
 }

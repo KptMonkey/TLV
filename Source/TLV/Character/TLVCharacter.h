@@ -7,6 +7,7 @@
 #include "Abilities/GameplayAbility.h"
 #include "TLV/Actor/TLVProjectileWeapon.h"
 #include "TLV/Assets/TLVDataAssetInputConfig.h"
+#include "TLV/Component/Combat/TLVHeroCombatComponent.h"
 #include "TLVCharacter.generated.h"
 
 /**
@@ -36,4 +37,14 @@ private:
 	virtual void InitAbilityComponent() override;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input", meta = (AllowPrivateAccess=true))
 	TObjectPtr<UTLVDataAssetInputConfig> InputConfigDataAsset;
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat", meta = (AllowPrivateAccess=true))
+	TObjectPtr<UTLVHeroCombatComponent> HeroCombatComponent = nullptr;
+
+	void Input_AbilityInputPressed(FGameplayTag InputTag);
+	void Input_AbilityInputReleased(FGameplayTag InputTag);
+public:
+	FORCEINLINE TObjectPtr<UTLVHeroCombatComponent> GetCombatComponent() const
+	{
+		return HeroCombatComponent;
+	}
 };

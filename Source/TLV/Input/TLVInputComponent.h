@@ -19,6 +19,9 @@ public:
 	// Warrior Tutorial
 	template<class UserObject, typename CallbackFunc>
 	void BindNativeInputAction(UTLVDataAssetInputConfig* InputConfig, FGameplayTag const& InputTag, ETriggerEvent TriggerEvent, UserObject* ContextObject, CallbackFunc Func);
+
+	template<class UserObject, typename CallbackFunc>
+	void BindAbilityInputAction(UTLVDataAssetInputConfig* InputConfig, UserObject* ContextObject, CallbackFunc InputPressedFunc, CallbackFunc InputReleaseFuc);
 };
 
 template <class UserClass, typename PressedFuncType, typename ReleasedFuncType, typename HeldFuncType>
@@ -60,3 +63,18 @@ void UTLVInputComponent::BindNativeInputAction(UTLVDataAssetInputConfig* InputCo
 		BindAction(FoundAction, TriggerEvent, ContextObject, Func);
 	}
 }
+
+template<class UserObject, typename CallbackFunc>
+void UTLVInputComponent::BindAbilityInputAction(UTLVDataAssetInputConfig* InputConfig, UserObject* ContextObject, CallbackFunc InputPressedFunc, CallbackFunc InputReleaseFuc)
+{
+	checkf(InputConfig, TEXT("Input config data asset is null"));
+
+	for (auto const& AbilityInputActionConfig : InputConfig->AbilityInputActions)
+	{
+		if (!AbilityInputActionConfig.IsValid()) continue;
+
+		BindAction(AbilityInputActionConfig.InputAction, ETriggerEvent::Started, ContextObject, InputPressedFunc, AbilityInputActionConfig.InputTag);
+		BindAction(AbilityInputActionConfig.InputAction, ETriggerEvent::Completed, ContextObject, InputReleaseFuc, AbilityInputActionConfig.InputTag);
+	}
+}
+

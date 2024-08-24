@@ -22,6 +22,8 @@ public:
 	void AbilityInputTagReleasd(FGameplayTag const& InputTag);
 	void TryActivateGameplayAbility();
 
+	void OnAbilityInputPressed(FGameplayTag const& InputTag);
+	void OnAbilityInputReleased(FGameplayTag const& InputTag);
 	protected:
 	void EffectApplied(UAbilitySystemComponent* ASC, FGameplayEffectSpec const& GameplayEffectSpec, FActiveGameplayEffectHandle ActiveGameplayEffectHandle);
 public:
