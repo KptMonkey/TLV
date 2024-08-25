@@ -24,6 +24,11 @@ void ATLVBaseCharacter::TryActivateGameplayAbility()
 
 }
 
+USkeletalMeshComponent* ATLVBaseCharacter::GetVisibleMesh() const
+{
+	return RetargetedMesh != nullptr ? RetargetedMesh.Get() : GetMesh(); 
+}
+
 // Called when the game starts or when spawned
 void ATLVBaseCharacter::BeginPlay()
 {

@@ -4,6 +4,7 @@
 #include "TLVGameplayAbility.h"
 
 #include "AbilitySystemComponent.h"
+#include "TLV/Character/TLVCharacter.h"
 
 void UTLVGameplayAbility::EndAbility(const FGameplayAbilitySpecHandle Handle,
                                      const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo,
@@ -39,4 +40,9 @@ UTLVCombatComponent* UTLVGameplayAbility::GetCombatComponentFromActorInfo() cons
 UTLVAbilitySystemComponent* UTLVGameplayAbility::GetTLVAbilitySystemComponentFromActorInfo() const
 {
 	return Cast<UTLVAbilitySystemComponent>(CurrentActorInfo->AbilitySystemComponent);
+}
+
+USkeletalMeshComponent* UTLVGameplayAbility::GetVisibleMeshComponentFromActorInfo() const
+{
+	return Cast<ATLVCharacter>(GetAvatarActorFromActorInfo())->GetVisibleMesh();
 }

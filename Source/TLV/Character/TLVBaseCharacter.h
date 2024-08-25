@@ -28,6 +28,8 @@ public:
 
 	UPROPERTY()
 	TObjectPtr<UTLVCrosshairWidget> CrosshairWidget;
+	UFUNCTION(BlueprintCallable)
+	USkeletalMeshComponent* GetVisibleMesh() const;
 protected:
 	virtual void BeginPlay() override;
 	virtual void PossessedBy(AController* NewController) override;
@@ -40,12 +42,14 @@ protected:
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="TLV | Input")
 	TSoftObjectPtr<UTLVDataAssetStartupData> StartUpData;
 private:
 	virtual void InitAbilityComponent();
 protected:
-	UPROPERTY(EditAnywhere, Category="Abilities")
+	UPROPERTY(EditAnywhere, Category="TLV | Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TLV | Retargeted Mesh")
+	TObjectPtr<USkeletalMeshComponent> RetargetedMesh;
 };

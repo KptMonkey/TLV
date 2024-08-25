@@ -30,6 +30,8 @@ protected:
 	UTLVCombatComponent* GetCombatComponentFromActorInfo() const;
 	UFUNCTION(BlueprintPure, Category="TLVAbility")
 	UTLVAbilitySystemComponent* GetTLVAbilitySystemComponentFromActorInfo() const;
+	UFUNCTION(BlueprintPure, Category="TLVAbility")
+	USkeletalMeshComponent* GetVisibleMeshComponentFromActorInfo() const;	
 public:
 	UPROPERTY(EditDefaultsOnly, Category="Input")
 	FGameplayTag StartupInputTag;

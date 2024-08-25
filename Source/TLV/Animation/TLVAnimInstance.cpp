@@ -40,7 +40,7 @@ void UTLVAnimInstance::CalculateTransformationToAttachLeftHandToWeapon()
 	LeftHandTransform = Character->Weapon->GetSocketTransform(FName("LeftHandSocket"), ERelativeTransformSpace::RTS_World);
 	FVector OutPosition;
 	FRotator OutRotation;
-	Character->GetMesh()->TransformToBoneSpace(FName("hand_r"), LeftHandTransform.GetLocation(), LeftHandTransform.GetRotation().Rotator(), OutPosition, OutRotation);
+	Character->GetVisibleMesh()->TransformToBoneSpace(FName("hand_r"), LeftHandTransform.GetLocation(), LeftHandTransform.GetRotation().Rotator(), OutPosition, OutRotation);
 	LeftHandTransform.SetLocation(OutPosition);
 	LeftHandTransform.SetRotation(OutRotation.Quaternion());
 }
