@@ -5,6 +5,7 @@
 
 #include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
 #include "TLV/Player/TLVPlayerState.h"
+#include "TLV/Assets/TLVDataAssetStartupData.h"
 
 // Sets default values
 ATLVBaseCharacter::ATLVBaseCharacter()
@@ -26,7 +27,12 @@ void ATLVBaseCharacter::TryActivateGameplayAbility()
 
 USkeletalMeshComponent* ATLVBaseCharacter::GetVisibleMesh() const
 {
-	return RetargetedMesh != nullptr ? RetargetedMesh.Get() : GetMesh(); 
+	return VisibleMesh != nullptr ? VisibleMesh.Get() : GetMesh(); 
+}
+
+USkeletalMeshComponent* ATLVBaseCharacter::GetAnimatedMesh() const
+{
+	return  AnimatedMesh != nullptr ? AnimatedMesh.Get() : GetMesh(); 
 }
 
 // Called when the game starts or when spawned

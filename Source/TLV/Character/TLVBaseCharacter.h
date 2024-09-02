@@ -6,12 +6,11 @@
 #include "AbilitySystemInterface.h"
 #include "Abilities/GameplayAbility.h"
 #include "GameFramework/Character.h"
-#include "TLV/Assets/TLVDataAssetStartupData.h"
 #include "TLV/UI/TLVCrosshairWidget.h"
 #include "TLVBaseCharacter.generated.h"
 
 class UAttributeSet;
-
+class UTLVDataAssetStartupData;
 UCLASS()
 class TLV_API ATLVBaseCharacter : public ACharacter, public IAbilitySystemInterface
 {
@@ -30,6 +29,8 @@ public:
 	TObjectPtr<UTLVCrosshairWidget> CrosshairWidget;
 	UFUNCTION(BlueprintCallable)
 	USkeletalMeshComponent* GetVisibleMesh() const;
+	UFUNCTION(BlueprintCallable)
+	USkeletalMeshComponent* GetAnimatedMesh() const;
 protected:
 	virtual void BeginPlay() override;
 	virtual void PossessedBy(AController* NewController) override;
@@ -51,5 +52,7 @@ protected:
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TLV | Retargeted Mesh")
-	TObjectPtr<USkeletalMeshComponent> RetargetedMesh;
+	TObjectPtr<USkeletalMeshComponent> VisibleMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TLV | Animated Mesh")
+	TObjectPtr<USkeletalMeshComponent> AnimatedMesh;
 };

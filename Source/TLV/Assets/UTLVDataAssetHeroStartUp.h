@@ -4,19 +4,9 @@
 
 #include "CoreMinimal.h"
 #include "TLVDataAssetStartupData.h"
+#include "TLV/Common/TLVStructTypes.h"
 #include "UTLVDataAssetHeroStartUp.generated.h"
 
-USTRUCT(BlueprintType)
-struct FTLVHeroAbilitySet
-{
-	GENERATED_BODY()
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "InputTag"))
-	FGameplayTag InputTag;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UTLVGameplayAbility> AbilityToGrant;
-	bool IsValid() const;
-
-};
 
 /**
  * 

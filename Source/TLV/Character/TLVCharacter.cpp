@@ -13,7 +13,7 @@
 #include "TLV/Player/TLVPlayerController.h"
 #include "TLV/Player/TLVPlayerState.h"
 #include "TLV/UI/HUD/TLVHUD.h"
-
+#include "TLV/Assets/UTLVDataAssetHeroStartUp.h"
 ATLVCharacter::ATLVCharacter()
 {
 	GetCharacterMovement()->bOrientRotationToMovement = true;

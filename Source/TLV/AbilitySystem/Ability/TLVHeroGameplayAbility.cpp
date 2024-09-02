@@ -16,7 +16,7 @@ ATLVPlayerController* UTLVHeroGameplayAbility::GetHeroControllerFromActorInfo()
 {
 	if (!CachedTLVHeroController.IsValid())
 	{
-		CachedTLVHeroController = Cast<ATLVPlayerController>(CurrentActorInfo->AvatarActor);
+		CachedTLVHeroController = Cast<ATLVPlayerController>(CurrentActorInfo->PlayerController);
 	}
 	return CachedTLVHeroController.IsValid() ? CachedTLVHeroController.Get() : nullptr;
 }

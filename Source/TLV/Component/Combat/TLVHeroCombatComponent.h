@@ -7,21 +7,15 @@
 #include "TLVHeroCombatComponent.generated.h"
 
 
+class ATLVMeleeWeapon;
+
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class TLV_API UTLVHeroCombatComponent : public UTLVCombatComponent
 {
 	GENERATED_BODY()
 
 public:
-	// Sets default values for this component's properties
-	UTLVHeroCombatComponent();
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-public:
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType,
-	                           FActorComponentTickFunction* ThisTickFunction) override;
+	UFUNCTION(BlueprintCallable, Category="TLV")
+	ATLVMeleeWeapon* GetHeroCarriedWeaponByTag(FGameplayTag WeaponTag) const;
 };

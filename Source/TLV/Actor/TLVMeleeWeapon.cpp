@@ -16,4 +16,14 @@ ATLVMeleeWeapon::ATLVMeleeWeapon()
 	WeaponCollisionBox->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
+void ATLVMeleeWeapon::AssignGrantedAbilitySpecHandles(TArray<FGameplayAbilitySpecHandle> const& AbilitySpecHandles)
+{
+		GrantedAbilitySpecHandles = AbilitySpecHandles;
+}
+
+TArray<FGameplayAbilitySpecHandle> ATLVMeleeWeapon::GetGrantedAbilitySpecHandles() const
+{
+	return GrantedAbilitySpecHandles;
+}
+
 

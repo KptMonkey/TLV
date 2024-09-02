@@ -2,6 +2,7 @@
 
 
 #include "TLVCombatComponent.h"
+#include "TLV/Actor/TLVMeleeWeapon.h"
 
 
 void UTLVCombatComponent::RegisterSpawnedWeapon(FGameplayTag WeaponTagToRegister,

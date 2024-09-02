@@ -4,10 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
-#include "TLV/Actor/TLVMeleeWeapon.h"
 #include "TLV/Component/TLVBaseComponent.h"
 #include "TLVCombatComponent.generated.h"
 
+class ATLVMeleeWeapon;
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class TLV_API UTLVCombatComponent : public UTLVBaseComponent

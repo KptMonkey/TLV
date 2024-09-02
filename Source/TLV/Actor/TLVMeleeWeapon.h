@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/Actor.h"
+#include "TLV/Common/TLVStructTypes.h"
 #include "TLVMeleeWeapon.generated.h"
 
 UCLASS()
@@ -24,5 +25,13 @@ protected:
 	TObjectPtr<UBoxComponent> WeaponCollisionBox;
 
 public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapons")
+	FTLVHeroWeaponData HeroWeaponData;
+	UFUNCTION(BlueprintCallable)
+	void AssignGrantedAbilitySpecHandles(TArray<FGameplayAbilitySpecHandle> const& AbilitySpecHandles);
+	UFUNCTION(BlueprintPure)
+	TArray<FGameplayAbilitySpecHandle> GetGrantedAbilitySpecHandles() const;
 	FORCEINLINE UBoxComponent* GetWeaponCollisionBox() { return WeaponCollisionBox;}
+private:
+	TArray<FGameplayAbilitySpecHandle> GrantedAbilitySpecHandles;
 };

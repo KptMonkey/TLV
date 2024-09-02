@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "TLVBaseCharacter.h"
-#include "Abilities/GameplayAbility.h"
 #include "TLV/Actor/TLVProjectileWeapon.h"
 #include "TLV/Assets/TLVDataAssetInputConfig.h"
 #include "TLV/Component/Combat/TLVHeroCombatComponent.h"

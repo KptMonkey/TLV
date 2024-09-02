@@ -4,6 +4,7 @@
 #include "TLVAbilitySystemComponent.h"
 
 #include "Ability/TLVGameplayAbility.h"
+#include "TLV/Common/TLVStructTypes.h"
 
 void UTLVAbilitySystemComponent::AbilityActorInfoSet()
 {
@@ -90,6 +91,35 @@ void UTLVAbilitySystemComponent::OnAbilityInputPressed(FGameplayTag const& Input
 
 void UTLVAbilitySystemComponent::OnAbilityInputReleased(FGameplayTag const& InputTag)
 {
+}
+
+void UTLVAbilitySystemComponent::GrantHeroWeaponAbilities(TArray<FTLVHeroAbilitySet> const& DefaultWeaponAbilities,
+	int32 ApplyLevel, TArray<FGameplayAbilitySpecHandle>& OutGrantedAbilitySpecHandles)
+{
+	if (DefaultWeaponAbilities.IsEmpty()) return;
+
+	for (auto const& WeaponAbility : DefaultWeaponAbilities)
+	{
+		if (!WeaponAbility.IsValid()) return;
+
+		FGameplayAbilitySpec AbilitySpec(WeaponAbility.AbilityToGrant);
+		AbilitySpec.Level = ApplyLevel;
+		AbilitySpec.SourceObject = GetAvatarActor();
+		AbilitySpec.DynamicAbilityTags.AddTag(WeaponAbility.InputTag);
+		OutGrantedAbilitySpecHandles.AddUnique(GiveAbility(AbilitySpec));
+	}
+}
+
+void UTLVAbilitySystemComponent::RemoveGrantedHeroWeaponAbilites(TArray<FGameplayAbilitySpecHandle>& AbilitySpecHandles)
+{
+	if (AbilitySpecHandles.IsEmpty()) return;
+
+	for (auto const& SpecHandle : AbilitySpecHandles)
+	{
+		if (!SpecHandle.IsValid()) continue;
+		ClearAbility(SpecHandle);
+	}
+	AbilitySpecHandles.Empty();
 }
 
 void UTLVAbilitySystemComponent::EffectApplied(UAbilitySystemComponent* ASC,

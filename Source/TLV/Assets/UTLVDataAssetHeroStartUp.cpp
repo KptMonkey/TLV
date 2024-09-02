@@ -3,10 +3,7 @@
 
 #include "UTLVDataAssetHeroStartUp.h"
 
-bool FTLVHeroAbilitySet::IsValid() const
-{
-	return InputTag.IsValid() && AbilityToGrant;
-}
+
 
 void UUTLVDataAssetHeroStartUp::GiveToAbilitySystemComponent(UTLVAbilitySystemComponent* ASC, int32 ApplyLevel)
 {

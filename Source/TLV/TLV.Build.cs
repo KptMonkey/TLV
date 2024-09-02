@@ -10,7 +10,7 @@ public class TLV : ModuleRules
 	
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "GameplayAbilities"  });
 
-		PrivateDependencyModuleNames.AddRange(new string[] {  "GameplayTags", "GameplayTasks", "NavigationSystem", "Niagara"  });
+		PrivateDependencyModuleNames.AddRange(new string[] {  "GameplayTags", "GameplayTasks", "NavigationSystem", "Niagara", "AnimGraphRuntime", "AnimGraphRuntime" });
 
 		// Uncomment if you are using Slate UI
 		// PrivateDependencyModuleNames.AddRange(new string[] { "Slate", "SlateCore" });
