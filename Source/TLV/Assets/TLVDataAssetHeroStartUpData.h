@@ -5,14 +5,14 @@
 #include "CoreMinimal.h"
 #include "TLVDataAssetStartupData.h"
 #include "TLV/Common/TLVStructTypes.h"
-#include "UTLVDataAssetHeroStartUp.generated.h"
+#include "TLVDataAssetHeroStartUpData.generated.h"
 
 
 /**
  * 
  */
 UCLASS()
-class TLV_API UUTLVDataAssetHeroStartUp : public UTLVDataAssetStartupData
+class TLV_API UTLVDataAssetHeroStartUpData : public UTLVDataAssetStartupData
 {
 	GENERATED_BODY()
 public:

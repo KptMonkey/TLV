@@ -1,11 +1,11 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "UTLVDataAssetHeroStartUp.h"
+#include "TLVDataAssetHeroStartUpData.h"
 
 
 
-void UUTLVDataAssetHeroStartUp::GiveToAbilitySystemComponent(UTLVAbilitySystemComponent* ASC, int32 ApplyLevel)
+void UTLVDataAssetHeroStartUpData::GiveToAbilitySystemComponent(UTLVAbilitySystemComponent* ASC, int32 ApplyLevel)
 {
 	Super::GiveToAbilitySystemComponent(ASC, ApplyLevel);
 	for (auto const& AbilitySet : HeroStartUpAbilitySets)

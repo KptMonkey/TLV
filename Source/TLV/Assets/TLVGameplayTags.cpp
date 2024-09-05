@@ -77,5 +77,6 @@ namespace TLVGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Melee_Heavy_Axe, "Player.Ability.Attack.Melee.Heavy.Axe")
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_Axe, "Player.Weapon.Axe")
-	
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_JumpToFinisher, "Player.Status.JumpToFinisher")
+
 }

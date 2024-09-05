@@ -1,14 +1,14 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "TLVEnemy.h"
+#include "TLVEnemyCharacter.h"
 
 #include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
 #include "TLV/AbilitySystem/TLVAttributeSet.h"
 
 
 // Sets default values
-ATLVEnemy::ATLVEnemy()
+ATLVEnemyCharacter::ATLVEnemyCharacter()
 {
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
 	AbilitySystemComponent = CreateDefaultSubobject<UTLVAbilitySystemComponent>("AbilitySystemComponent");
@@ -17,13 +17,13 @@ ATLVEnemy::ATLVEnemy()
 	AttributeSet = CreateDefaultSubobject<UTLVAttributeSet>("AttributeSet");
 }
 
-void ATLVEnemy::BeginPlay()
+void ATLVEnemyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	InitAbilityComponent();
 }
 
-void ATLVEnemy::InitAbilityComponent()
+void ATLVEnemyCharacter::InitAbilityComponent()
 {
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Cast<UTLVAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
