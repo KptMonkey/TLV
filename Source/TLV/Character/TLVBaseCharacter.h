@@ -9,6 +9,8 @@
 #include "TLV/UI/TLVCrosshairWidget.h"
 #include "TLVBaseCharacter.generated.h"
 
+class UTLVAttributeSet;
+class UTLVAbilitySystemComponent;
 class UAttributeSet;
 class UTLVDataAssetStartupData;
 UCLASS()
@@ -31,23 +33,21 @@ public:
 	USkeletalMeshComponent* GetVisibleMesh() const;
 	UFUNCTION(BlueprintCallable)
 	USkeletalMeshComponent* GetAnimatedMesh() const;
+	FORCEINLINE TObjectPtr<UTLVAttributeSet> GetTLVAttributeSet() const { return AttributeSet;}
 protected:
 	virtual void BeginPlay() override;
 	virtual void PossessedBy(AController* NewController) override;
-	void AddCharacterAbilities();
+	void AddCharacterAbilities() const;
 	
 
 	UPROPERTY()
-	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+	TObjectPtr<UTLVAbilitySystemComponent> AbilitySystemComponent;
 
-	UPROPERTY()
-	TObjectPtr<UAttributeSet> AttributeSet;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="TLV | Abilities")
+	TObjectPtr<UTLVAttributeSet> AttributeSet;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="TLV | Input")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="TLV | Data")
 	TSoftObjectPtr<UTLVDataAssetStartupData> StartUpData;
-private:
-	virtual void InitAbilityComponent();
-protected:
 	UPROPERTY(EditAnywhere, Category="TLV | Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 

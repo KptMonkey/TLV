@@ -33,7 +33,7 @@ public:
 	void OnRep_DefendsBiteAttempt();
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 private:
-	virtual void InitAbilityComponent() override;
+	virtual void InitAbilityComponent();
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input", meta = (AllowPrivateAccess=true))
 	TObjectPtr<UTLVDataAssetInputConfig> InputConfigDataAsset;
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Combat", meta = (AllowPrivateAccess=true))

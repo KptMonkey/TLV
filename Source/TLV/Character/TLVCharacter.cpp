@@ -9,11 +9,13 @@
 #include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 #include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
+#include "TLV/AbilitySystem/TLVAttributeSet.h"
 #include "TLV/Input/TLVInputComponent.h"
 #include "TLV/Player/TLVPlayerController.h"
 #include "TLV/Player/TLVPlayerState.h"
 #include "TLV/UI/HUD/TLVHUD.h"
-#include "..\Assets\TLVDataAssetHeroStartUpData.h"
+#include "TLV/Assets/TLVDataAssetHeroStartUpData.h"
+
 ATLVCharacter::ATLVCharacter()
 {
 	GetCharacterMovement()->bOrientRotationToMovement = true;
@@ -36,7 +38,7 @@ void ATLVCharacter::PossessedBy(AController* NewController)
 	if (!StartUpData.IsNull())
 	{
 		auto const LoadedData = StartUpData.LoadSynchronous();
-		LoadedData->GiveToAbilitySystemComponent(Cast<UTLVAbilitySystemComponent>(AbilitySystemComponent));
+		LoadedData->GiveToAbilitySystemComponent(AbilitySystemComponent);
 	}
 }
 
@@ -124,10 +126,6 @@ void ATLVCharacter::InitAbilityComponent()
 {
 	auto const PlayerSate = GetPlayerState<ATLVPlayerState>();
 	check(PlayerSate)
-	AbilitySystemComponent = PlayerSate->GetAbilitySystemComponent();
-	Cast<UTLVAbilitySystemComponent>(AbilitySystemComponent)->AbilityActorInfoSet();
-	AbilitySystemComponent->InitAbilityActorInfo(PlayerSate, this);
-	AttributeSet = PlayerSate->GetAttributeSet();
 
 	if (auto const TLVPlayerController = Cast<ATLVPlayerController>(GetController()))
 	{
@@ -139,8 +137,7 @@ void ATLVCharacter::InitAbilityComponent()
 	}
 	if (!HasAuthority()) return;
 
-	auto const TLVASC = CastChecked<UTLVAbilitySystemComponent>(AbilitySystemComponent);
-	TLVASC->AddCharacterAbilities(StartupAbilities);
+	AbilitySystemComponent->AddCharacterAbilities(StartupAbilities);
 }
 
 void ATLVCharacter::Input_AbilityInputPressed(FGameplayTag InputTag)

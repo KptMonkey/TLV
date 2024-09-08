@@ -4,13 +4,15 @@
 #include "TLVBaseCharacter.h"
 
 #include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
+#include "TLV/AbilitySystem/TLVAttributeSet.h"
 #include "TLV/Player/TLVPlayerState.h"
-#include "TLV/Assets/TLVDataAssetStartupData.h"
 
 // Sets default values
 ATLVBaseCharacter::ATLVBaseCharacter()
 {
 	PrimaryActorTick.bCanEverTick = false;
+	AbilitySystemComponent = CreateDefaultSubobject<UTLVAbilitySystemComponent>("TLVAbilitySystemComponent");
+	AttributeSet = CreateDefaultSubobject<UTLVAttributeSet>("TLVAttributeSet");
 	
 }
 
@@ -45,29 +47,21 @@ void ATLVBaseCharacter::BeginPlay()
 void ATLVBaseCharacter::PossessedBy(AController* NewController)
 {
 	Super::PossessedBy(NewController);
-	ensureMsgf(!StartUpData.IsNull(), TEXT("Assign startup data to %s"), *GetName());
+	if (AbilitySystemComponent)
+	{
+		AbilitySystemComponent->InitAbilityActorInfo(this, this);
+		ensureMsgf(!StartUpData.IsNull(), TEXT("Assign startup data to %s"), *GetName());
+	}
 }
 
-void ATLVBaseCharacter::AddCharacterAbilities()
+void ATLVBaseCharacter::AddCharacterAbilities() const
 {
 	if (!HasAuthority()) return;
 
-	auto const TLVASC = CastChecked<UTLVAbilitySystemComponent>(AbilitySystemComponent);
-	TLVASC->AddCharacterAbilities(StartupAbilities);
+	AbilitySystemComponent->AddCharacterAbilities(StartupAbilities);
 }
 
-void ATLVBaseCharacter::InitAbilityComponent()
-{
-	auto* MyPlayerState = GetPlayerState<ATLVPlayerState>();
-	check(MyPlayerState);
-	MyPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(MyPlayerState, this);
-	AbilitySystemComponent = MyPlayerState->GetAbilitySystemComponent();
 
-	if (!HasAuthority()) return;
-	auto const TLVASC = CastChecked<UTLVAbilitySystemComponent>(AbilitySystemComponent);
-	TLVASC->AddCharacterAbilities(StartupAbilities);
-
-}
 
 
 
