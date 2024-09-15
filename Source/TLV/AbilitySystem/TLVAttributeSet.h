@@ -54,6 +54,18 @@ public:
 	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(UTLVAttributeSet, MaxHealth);
 
+	UPROPERTY(BlueprintReadOnly, Category = "TLV | Damage")
+	FGameplayAttributeData AttackPower;
+	ATTRIBUTE_ACCESSORS(UTLVAttributeSet,AttackPower)
+
+	UPROPERTY(BlueprintReadOnly, Category = "TLV | Damage")
+	FGameplayAttributeData DefensePower;
+	ATTRIBUTE_ACCESSORS(UTLVAttributeSet,DefensePower)
+
+	UPROPERTY(BlueprintReadOnly, Category = "TLV | Damage")
+	FGameplayAttributeData DamageTaken;
+	ATTRIBUTE_ACCESSORS(UTLVAttributeSet,DamageTaken)
+	
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;
 

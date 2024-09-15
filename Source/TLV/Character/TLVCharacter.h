@@ -32,6 +32,7 @@ public:
 	UFUNCTION()
 	void OnRep_DefendsBiteAttempt();
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+	virtual TObjectPtr<UTLVCombatComponent> GetCombatComponent() const override;
 private:
 	virtual void InitAbilityComponent();
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Input", meta = (AllowPrivateAccess=true))
@@ -42,7 +43,7 @@ private:
 	void Input_AbilityInputPressed(FGameplayTag InputTag);
 	void Input_AbilityInputReleased(FGameplayTag InputTag);
 public:
-	FORCEINLINE TObjectPtr<UTLVHeroCombatComponent> GetCombatComponent() const
+	FORCEINLINE TObjectPtr<UTLVHeroCombatComponent> GetHeroCombatComponent() const
 	{
 		return HeroCombatComponent;
 	}

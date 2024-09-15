@@ -3,6 +3,8 @@
 
 #include "TLVAttributeSet.h"
 
+#include <string>
+
 #include "Net/UnrealNetwork.h"
 #include "GameplayEffectExtension.h"
 #include "GameFramework/Character.h"
@@ -13,6 +15,9 @@ UTLVAttributeSet::UTLVAttributeSet()
 {
 	InitMaxHealth(100);
 	InitHealth(100);
+	InitAttackPower(16);
+	InitDamageTaken(0);
+	InitDefensePower(10);
 }
 
 void UTLVAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -35,9 +40,20 @@ void UTLVAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, f
 
 void UTLVAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
 {
-	Super::PostGameplayEffectExecute(Data);
-	FEffectProperties EffectProperties;
-	SetEffectProperties(Data, EffectProperties);
+	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
+	{
+		const float NewHealth = FMath::Clamp(GetHealth(), 0.f, GetMaxHealth());
+		SetHealth(NewHealth);
+	}
+
+	if (Data.EvaluatedData.Attribute == GetDamageTakenAttribute())
+	{
+		auto const NewHealth = FMath::Clamp(GetHealth() - GetDamageTaken(), 0.f, GetMaxHealth());
+		GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Purple, FString(std::to_string(GetHealth()).c_str()));
+		GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Purple, FString(std::to_string(GetDamageTaken()).c_str()));
+		GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Purple, FString(std::to_string(NewHealth).c_str()));
+		SetHealth(NewHealth);
+	}
 }
 
 void UTLVAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const

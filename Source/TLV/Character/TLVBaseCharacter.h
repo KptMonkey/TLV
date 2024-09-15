@@ -6,6 +6,7 @@
 #include "AbilitySystemInterface.h"
 #include "Abilities/GameplayAbility.h"
 #include "GameFramework/Character.h"
+#include "TLV/Component/Combat/TLVCombatInterface.h"
 #include "TLV/UI/TLVCrosshairWidget.h"
 #include "TLVBaseCharacter.generated.h"
 
@@ -14,7 +15,7 @@ class UTLVAbilitySystemComponent;
 class UAttributeSet;
 class UTLVDataAssetStartupData;
 UCLASS()
-class TLV_API ATLVBaseCharacter : public ACharacter, public IAbilitySystemInterface
+class TLV_API ATLVBaseCharacter : public ACharacter, public IAbilitySystemInterface, public ITLVCombatInterface
 {
 	GENERATED_BODY()
 
@@ -34,6 +35,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	USkeletalMeshComponent* GetAnimatedMesh() const;
 	FORCEINLINE TObjectPtr<UTLVAttributeSet> GetTLVAttributeSet() const { return AttributeSet;}
+	virtual TObjectPtr<UTLVCombatComponent> GetCombatComponent() const override;
 protected:
 	virtual void BeginPlay() override;
 	virtual void PossessedBy(AController* NewController) override;

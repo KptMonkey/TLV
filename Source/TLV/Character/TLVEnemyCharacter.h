@@ -17,10 +17,11 @@ public:
 	virtual void PossessedBy(AController* NewController) override;
 	// Sets default values for this character's properties
 	ATLVEnemyCharacter();
-	FORCEINLINE TObjectPtr<UTLVEnemyCombatComponent> GetCombatComponent() const
+	FORCEINLINE TObjectPtr<UTLVEnemyCombatComponent> GetEnemyCombatComponent() const
 	{
 		return EnemyCombatComponent;
 	}
+	virtual TObjectPtr<UTLVCombatComponent> GetCombatComponent() const override;
 protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category= "TLV | Combat")
 	TObjectPtr<UTLVEnemyCombatComponent> EnemyCombatComponent = nullptr;

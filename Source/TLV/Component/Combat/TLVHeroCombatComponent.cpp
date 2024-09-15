@@ -3,9 +3,40 @@
 
 #include "TLVHeroCombatComponent.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
+#include "TLV/Actor/TLVMeleeWeapon.h"
+#include "TLV/Assets/TLVGameplayTags.h"
+
 
 ATLVMeleeWeapon* UTLVHeroCombatComponent::GetHeroCarriedWeaponByTag(FGameplayTag WeaponTag) const
 {
 	return GetCarriedWeapon(WeaponTag);
+}
+
+ATLVMeleeWeapon* UTLVHeroCombatComponent::GetHeroEquippedWeapon() const
+{
+	return GetEquippedWeapon();
+}
+
+float UTLVHeroCombatComponent::GetHeroEquippedWeaponDamageLevel(int Level) const
+{
+	return GetHeroEquippedWeapon()->HeroWeaponData.WeaponBaseDamage.GetValueAtLevel(Level);
+}
+
+void UTLVHeroCombatComponent::OnHitTargetActor(AActor* TargetActor)
+{
+	if (OverlappedActors.Contains(TargetActor)) return;
+
+	OverlappedActors.AddUnique(TargetActor);
+	FGameplayEventData EventData;
+	EventData.Instigator = GetOwningPawn();
+	EventData.Target = TargetActor;
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetOwningPawn(), TLVGameplayTags::Shared_Event_Melee_Hit, EventData);
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetOwningPawn(), TLVGameplayTags::Player_Event_Hit_Pause, {});
+}
+
+void UTLVHeroCombatComponent::OnPulledFromTargetActor(AActor* TargetActor)
+{
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetOwningPawn(), TLVGameplayTags::Player_Event_Hit_Pause, {});
 }
 

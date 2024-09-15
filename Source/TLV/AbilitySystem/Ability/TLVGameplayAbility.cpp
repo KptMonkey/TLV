@@ -3,6 +3,7 @@
 
 #include "TLVGameplayAbility.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
 #include "TLV/Character/TLVCharacter.h"
 #include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
@@ -51,4 +52,20 @@ USkeletalMeshComponent* UTLVGameplayAbility::GetVisibleMeshComponentFromActorInf
 USkeletalMeshComponent* UTLVGameplayAbility::GetAnimatedMeshComponentFromActorInfo() const
 {
 	return Cast<ATLVCharacter>(GetAvatarActorFromActorInfo())->GetAnimatedMesh();
+}
+
+FActiveGameplayEffectHandle UTLVGameplayAbility::NativeApplyEffectSpecHandleToTarget(AActor* TargetActor,
+	FGameplayEffectSpecHandle const& GameplayEffectSpecHandle)
+{
+	auto const TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(TargetActor);
+	check(TargetASC)
+	return GetTLVAbilitySystemComponentFromActorInfo()->ApplyGameplayEffectSpecToTarget(*GameplayEffectSpecHandle.Data, TargetASC);
+}
+
+FActiveGameplayEffectHandle UTLVGameplayAbility::BP_ApplyEffectSpecHandleToTarget(AActor* TargetActor,
+	FGameplayEffectSpecHandle const& GameplayEffectSpecHandle, ETLVSuccessType& SuccessType)
+{
+	auto const Handle = NativeApplyEffectSpecHandleToTarget(TargetActor, GameplayEffectSpecHandle);
+	SuccessType = Handle.WasSuccessfullyApplied() ? ETLVSuccessType::Success : ETLVSuccessType::Failed;
+	return Handle;
 }

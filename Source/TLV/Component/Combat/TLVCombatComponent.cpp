@@ -11,6 +11,9 @@ void UTLVCombatComponent::RegisterSpawnedWeapon(FGameplayTag WeaponTagToRegister
 	checkf(!CarriedWeapons.Contains(WeaponTagToRegister), TEXT("Weapon already exist"));
 	check(WeaponToRegister);
 	CarriedWeapons.Emplace(WeaponTagToRegister, WeaponToRegister);
+
+	WeaponToRegister->OnWeaponHitTarget.BindUObject(this, &ThisClass::OnHitTargetActor);
+	WeaponToRegister->OnWeaponPulledFromTarget.BindUObject(this, &ThisClass::OnPulledFromTargetActor);
 	if (RegisterEquippedWeapon)
 	{
 		EquippedWeaponTag = WeaponTagToRegister;
@@ -38,4 +41,36 @@ ATLVMeleeWeapon* UTLVCombatComponent::GetEquippedWeapon() const
 		return nullptr;
 	}
 	return GetCarriedWeapon(EquippedWeaponTag);
+}
+
+void UTLVCombatComponent::ToggleWeaponCollision(bool bEnable, EToggleDamageType ToggleDamageType)
+{
+	if (!bEnable)
+	{
+		OverlappedActors.Empty();
+	}
+
+	switch (ToggleDamageType)
+	{
+	case EToggleDamageType::CURRENT_EQUIPPED_WEAPON:
+		{
+			auto const Weapon = GetEquippedWeapon();
+			check(Weapon);
+			auto const CollisionEnabled = bEnable ? ECollisionEnabled::QueryOnly : ECollisionEnabled::NoCollision;
+			Weapon->GetWeaponCollisionBox()->SetCollisionEnabled(CollisionEnabled);
+			break;
+		}
+	case EToggleDamageType::LEFT_HAND:
+		break;
+	case EToggleDamageType::RIGHT_HAND:
+		break;
+	}
+}
+
+void UTLVCombatComponent::OnHitTargetActor(AActor* TargetActor)
+{
+}
+
+void UTLVCombatComponent::OnPulledFromTargetActor(AActor* TargetActor)
+{
 }

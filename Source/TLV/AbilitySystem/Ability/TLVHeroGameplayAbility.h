@@ -15,12 +15,14 @@ class TLV_API UTLVHeroGameplayAbility : public UTLVGameplayAbility
 {
 	GENERATED_BODY()
 public:
-	UFUNCTION(BlueprintPure, Category="TLVAbility")
+	UFUNCTION(BlueprintPure, Category="TLV | Ability")
 	ATLVCharacter* GetHeroCharacterFromActorInfo();
-	UFUNCTION(BlueprintPure, Category="TLVAbility")
+	UFUNCTION(BlueprintPure, Category="TLV | Ability")
 	ATLVPlayerController* GetHeroControllerFromActorInfo();
-	UFUNCTION(BlueprintPure, Category="TLVAbility")
-	UTLVCombatComponent* GetHeroCombatComponentFromActorInfo();
+	UFUNCTION(BlueprintPure, Category="TLV | Ability")
+	UTLVHeroCombatComponent* GetHeroCombatComponentFromActorInfo();
+	UFUNCTION(BlueprintPure, Category="TLV | Ability")
+	FGameplayEffectSpecHandle MakeHeroDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass, float WeaponBaseDamage, FGameplayTag CurrentAttackTag, int CurrentAttack);
 private:
 	TWeakObjectPtr<ATLVCharacter> CachedTLVHeroCharacter;
 	TWeakObjectPtr<ATLVPlayerController> CachedTLVHeroController;

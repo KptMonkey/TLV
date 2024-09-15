@@ -16,6 +16,13 @@ class TLV_API UTLVHeroCombatComponent : public UTLVCombatComponent
 
 public:
 
-	UFUNCTION(BlueprintCallable, Category="TLV")
+	UFUNCTION(BlueprintCallable, Category="TLV | Combat")
 	ATLVMeleeWeapon* GetHeroCarriedWeaponByTag(FGameplayTag WeaponTag) const;
+	UFUNCTION(BlueprintCallable, Category="TLV | Combat")
+	ATLVMeleeWeapon* GetHeroEquippedWeapon() const;
+	UFUNCTION(BlueprintCallable, Category="TLV | Combat")
+	float GetHeroEquippedWeaponDamageLevel(int Level) const;
+	virtual void OnHitTargetActor(AActor* TargetActor) override;
+	virtual void OnPulledFromTargetActor(AActor* TargetActor) override;
+	
 };

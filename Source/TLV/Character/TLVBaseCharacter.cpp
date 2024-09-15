@@ -37,6 +37,11 @@ USkeletalMeshComponent* ATLVBaseCharacter::GetAnimatedMesh() const
 	return  AnimatedMesh != nullptr ? AnimatedMesh.Get() : GetMesh(); 
 }
 
+TObjectPtr<UTLVCombatComponent> ATLVBaseCharacter::GetCombatComponent() const
+{
+	return nullptr;
+}
+
 // Called when the game starts or when spawned
 void ATLVBaseCharacter::BeginPlay()
 {

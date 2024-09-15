@@ -122,6 +122,11 @@ void ATLVCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	
 }
 
+TObjectPtr<UTLVCombatComponent> ATLVCharacter::GetCombatComponent() const
+{
+	return HeroCombatComponent;
+}
+
 void ATLVCharacter::InitAbilityComponent()
 {
 	auto const PlayerSate = GetPlayerState<ATLVPlayerState>();

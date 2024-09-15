@@ -5,16 +5,15 @@
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
+#include "TLV/Common/TLVEnumTypes.h"
 #include "TLVBlueprintFunctionLibrary.generated.h"
 
+class UTLVCombatComponent;
 class UTLVAbilitySystemComponent;
 
-UENUM()
-enum class ETLVConfirmType : uint8
-{
-	YES,
-	NO
-};
+
+
+
 /**
  * 
  */
@@ -32,5 +31,8 @@ public:
 	static bool NativeDoesActorHaveTag(AActor* Actor, FGameplayTag TagToCheck);
 	UFUNCTION(BlueprintCallable, Category= "TLV | FunctionLibrary", meta = (DisplayName = "Does Actor Have Tag", ExpandEnumAsExecs = "OutConfirmType"))
 	static void BP_DoesActorHaveTag(AActor* Actor, FGameplayTag TagToCheck, ETLVConfirmType& OutConfirmType);
-	
+
+	static UTLVCombatComponent* NativeGetCombatComponentFromActor(AActor* Actor);
+	UFUNCTION(BlueprintCallable, Category= "TLV | FunctionLibrary", meta = (DisplayName = "GetCombatComponentFromActor", ExpandEnumAsExecs = "ValidType"))
+	static UTLVCombatComponent* BP_GetCombatComponentFromActor(AActor* Actor, ETLVValidType& ValidType);
 };

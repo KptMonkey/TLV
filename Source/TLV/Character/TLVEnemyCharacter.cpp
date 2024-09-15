@@ -34,6 +34,11 @@ ATLVEnemyCharacter::ATLVEnemyCharacter()
 
 }
 
+TObjectPtr<UTLVCombatComponent> ATLVEnemyCharacter::GetCombatComponent() const
+{
+	return EnemyCombatComponent;
+}
+
 void ATLVEnemyCharacter::InitEnemyStartUpData()
 {
 	if (StartUpData.IsNull()) return;

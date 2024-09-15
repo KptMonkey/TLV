@@ -23,8 +23,10 @@ struct FTLVHeroWeaponData
 	GENERATED_BODY()
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<UTLVHeroLinkedAnimLayer> WeaponAnimLayerToLink;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "InputTag"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "TLV | Input"))
 	TArray<FTLVHeroAbilitySet> DefaultWeaponAbilities;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "InputTag"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "TLV | Input"))
 	UInputMappingContext* WeaponInputMappingContext;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	FScalableFloat WeaponBaseDamage;
 };

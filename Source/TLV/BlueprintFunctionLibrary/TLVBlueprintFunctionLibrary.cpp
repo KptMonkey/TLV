@@ -5,6 +5,7 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
+#include "TLV/Component/Combat/TLVCombatInterface.h"
 
 TObjectPtr<UTLVAbilitySystemComponent> UTLVBlueprintFunctionLibrary::NativeGetTLVASCFromActor(
 	TObjectPtr<AActor> Actor)
@@ -39,4 +40,22 @@ bool UTLVBlueprintFunctionLibrary::NativeDoesActorHaveTag(AActor* Actor, FGamepl
 void UTLVBlueprintFunctionLibrary::BP_DoesActorHaveTag(AActor* Actor, FGameplayTag TagToCheck, ETLVConfirmType& OutConfirmType)
 {
 	OutConfirmType = NativeDoesActorHaveTag(Actor, TagToCheck) ? ETLVConfirmType::YES : ETLVConfirmType::NO;
+}
+
+UTLVCombatComponent* UTLVBlueprintFunctionLibrary::NativeGetCombatComponentFromActor(AActor* Actor)
+{
+	check(Actor);
+	if (auto const CombatComponentInterface = Cast<ITLVCombatInterface>(Actor))
+	{
+		return CombatComponentInterface->GetCombatComponent();
+	}
+	return nullptr;
+}
+
+UTLVCombatComponent* UTLVBlueprintFunctionLibrary::BP_GetCombatComponentFromActor(AActor* Actor,
+	ETLVValidType& ValidType)
+{
+	auto const CombatComponent =  NativeGetCombatComponentFromActor(Actor);
+	ValidType = CombatComponent ? ETLVValidType::VALID : ETLVValidType::INVALID;
+	return CombatComponent;
 }

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Abilities/GameplayAbility.h"
+#include "TLV/Common/TLVEnumTypes.h"
 #include "TLV/Component/Combat/TLVCombatComponent.h"
 #include "TLVGameplayAbility.generated.h"
 
@@ -34,7 +35,11 @@ protected:
 	UFUNCTION(BlueprintPure, Category="TLV| Mesh")
 	USkeletalMeshComponent* GetVisibleMeshComponentFromActorInfo() const;	
 	UFUNCTION(BlueprintPure, Category="TLV | Mesh")
-	USkeletalMeshComponent* GetAnimatedMeshComponentFromActorInfo() const;	
+	USkeletalMeshComponent* GetAnimatedMeshComponentFromActorInfo() const;
+	FActiveGameplayEffectHandle NativeApplyEffectSpecHandleToTarget(AActor* TargetActor,  FGameplayEffectSpecHandle const& GameplayEffectSpecHandle);
+	UFUNCTION(BlueprintCallable, Category="TLV | Ability", meta = (DisplayName = "ApplyEffectSpecHandleToTargetActor", ExpandEnumAsExecs = "SuccessType"))
+	FActiveGameplayEffectHandle BP_ApplyEffectSpecHandleToTarget(AActor* TargetActor,  FGameplayEffectSpecHandle const& GameplayEffectSpecHandle, ETLVSuccessType& SuccessType);
+
 public:
 	UPROPERTY(EditDefaultsOnly, Category="TLV | Input")
 	FGameplayTag StartupInputTag;

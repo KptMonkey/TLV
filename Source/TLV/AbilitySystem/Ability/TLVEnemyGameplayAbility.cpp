@@ -21,5 +21,5 @@ UTLVEnemyCombatComponent* UTLVEnemyGameplayAbility::GetEnemyCombatComponentFromA
 		// TODO: Show Error Message
 		return nullptr;
 	}
-	return GetEnemyCharacterFromActorInfo()->GetCombatComponent();
+	return GetEnemyCharacterFromActorInfo()->GetEnemyCombatComponent();
 }
