@@ -87,6 +87,23 @@ namespace TLVGameplayTags
 
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_Melee_Hit, "Shared.Event.Melee.Hit")
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact, "Shared.Event.HitReact")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Light_Front_Head, "Shared.Event.HitReact.Light.Front.Head")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Light_Front_Torso, "Shared.Event.HitReact.Light.Front.Torso")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Light_Left_Head_Up, "Shared.Event.HitReact.Light.Left.Head.Up")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Light_Left_Head_Down, "Shared.Event.HitReact.Light.Left.Head.Down")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Light_Left_Torso, "Shared.Event.HitReact.Light.Left.Torso")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Light_Right_Head_Down, "Shared.Event.HitReact.Light.Right.Head.Down")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Light_Right_Head_Up, "Shared.Event.HitReact.Light.Right.Head.Up")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Light_Right_Torso, "Shared.Event.HitReact.Light.Right.Torso")
+
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Heavy_Front_Head, "Shared.Event.HitReact.Heavy.Front.Head")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Heavy_Front_Torso, "Shared.Event.HitReact.Heavy.Front.Torso")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Heavy_Left_Head_Up, "Shared.Event.HitReact.Heavy.Left.Head.Up")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Heavy_Left_Head_Down, "Shared.Event.HitReact.Heavy.Left.Head.Down")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Heavy_Left_Torso, "Shared.Event.HitReact.Heavy.Left.Torso")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Heavy_Right_Head_Down, "Shared.Event.HitReact.Heavy.Right.Head.Down")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Heavy_Right_Head_Up, "Shared.Event.HitReact.Heavy.Right.Head.Up")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Heavy_Right_Torso, "Shared.Event.HitReact.Heavy.Right.Torso")
 
 	UE_DEFINE_GAMEPLAY_TAG(Shared_SetByCaller_BaseDamage, "Shared.SetByCaller.BaseDamage")
 

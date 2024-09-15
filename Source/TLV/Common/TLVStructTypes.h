@@ -9,7 +9,7 @@ USTRUCT(BlueprintType)
 struct FTLVHeroAbilitySet
 {
 	GENERATED_BODY()
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "InputTag"))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "TLV | InputTag"))
 	FGameplayTag InputTag;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	TSubclassOf<UTLVGameplayAbility> AbilityToGrant;
@@ -29,4 +29,14 @@ struct FTLVHeroWeaponData
 	UInputMappingContext* WeaponInputMappingContext;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	FScalableFloat WeaponBaseDamage;
+};
+
+USTRUCT(BlueprintType)
+struct FTLVGameplayMontage
+{
+	GENERATED_BODY()
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "TLV | Animation"))
+	UAnimMontage* AnimMontage = nullptr;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "TLV | Animation"))
+	FGameplayTag GameplayTag;
 };
