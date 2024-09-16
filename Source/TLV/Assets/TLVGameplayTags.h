@@ -71,12 +71,15 @@ namespace TLVGameplayTags
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_HitReact_Heavy_Right_Torso)
 
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_SetByCaller_BaseDamage)
+	
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Ability_Melee)
 
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_HitReact)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_Death)
 
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Death)
+	
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Status_Strafing)
 
 
 }

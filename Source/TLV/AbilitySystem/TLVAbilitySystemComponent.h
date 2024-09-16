@@ -27,8 +27,10 @@ public:
 	void OnAbilityInputReleased(FGameplayTag const& InputTag);
 	UFUNCTION(BlueprintCallable, Category= "TLV | Ability", meta = (ApplyLevel = "1"))
 	void GrantHeroWeaponAbilities(TArray<FTLVHeroAbilitySet> const& DefaultWeaponAbilities, int32 ApplyLevel, TArray<FGameplayAbilitySpecHandle>& OutGrantedAbilitySpecHandles);
-	UFUNCTION(BlueprintCallable, Category= "TLV | Ability", meta = (ApplyLevel = "1"))
+	UFUNCTION(BlueprintCallable, Category= "TLV | Ability")
 	void RemoveGrantedHeroWeaponAbilites(UPARAM(ref) TArray<FGameplayAbilitySpecHandle>& AbilitySpecHandles);
+	UFUNCTION(BlueprintCallable, Category= "TLV | Ability")
+    bool TryActivateAbilityByTag(FGameplayTag AbilityTag);
 protected:
 	void EffectApplied(UAbilitySystemComponent* ASC, FGameplayEffectSpec const& GameplayEffectSpec, FActiveGameplayEffectHandle ActiveGameplayEffectHandle);
 public:

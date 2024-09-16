@@ -31,7 +31,7 @@ ETeamAttitude::Type ATLVAIController::GetTeamAttitudeTowards(const AActor& Other
 {
 	auto const PawnToCheck = Cast<const APawn>(&Other);
 	auto const OtherTeamAgent = Cast<const IGenericTeamAgentInterface>(PawnToCheck->GetController());
-	if (OtherTeamAgent && OtherTeamAgent->GetGenericTeamId() != GetGenericTeamId())
+	if (OtherTeamAgent && OtherTeamAgent->GetGenericTeamId() < GetGenericTeamId())
 	{
 		return ETeamAttitude::Hostile;
 	}
@@ -43,16 +43,38 @@ void ATLVAIController::BeginPlay()
 	Super::BeginPlay();
 	if (auto CrowdComp = Cast<UCrowdFollowingComponent>(GetPathFollowingComponent()))
 	{
+		CrowdComp->SetCrowdSimulationState(bEnableDetourCrowdAvoidance ? ECrowdSimulationState::Enabled : ECrowdSimulationState::Disabled);
+		auto AvoidanceQuality = ECrowdAvoidanceQuality::Low;	
+		switch (DetourCrowdAvoidanceQuality)
+		{
+		case 1:
+			AvoidanceQuality = ECrowdAvoidanceQuality::Low;
+			break;
+		case 2:
+			AvoidanceQuality = ECrowdAvoidanceQuality::Medium;
+			break;
+		case 3:
+			AvoidanceQuality = ECrowdAvoidanceQuality::Good;
+			break;
+		case 4:
+			AvoidanceQuality = ECrowdAvoidanceQuality::High;
+			break;
+		}
+		CrowdComp->SetCrowdAvoidanceQuality(AvoidanceQuality);
+		CrowdComp->SetAvoidanceGroup(1);
+		CrowdComp->SetGroupsToAvoid(1);
+		CrowdComp->SetCrowdCollisionQueryRange(CollisonQueryRange);
 	}
 }
 
 void ATLVAIController::OnEnemyPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
 {
+	auto const BlackBoard = GetBlackboardComponent();
+	if (!Blackboard) return;
+	if (Blackboard->GetValueAsObject("TargetActor")) return;
+	
 	if (Stimulus.WasSuccessfullySensed() && Actor)
 	{
-		if (auto const BlackBoard = GetBlackboardComponent())
-		{
-			BlackBoard->SetValueAsObject(FName("TargetActor"), Actor);
-		}
+		BlackBoard->SetValueAsObject(FName("TargetActor"), Actor);
 	}
 }

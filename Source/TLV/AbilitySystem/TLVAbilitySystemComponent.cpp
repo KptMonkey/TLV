@@ -122,6 +122,23 @@ void UTLVAbilitySystemComponent::RemoveGrantedHeroWeaponAbilites(TArray<FGamepla
 	AbilitySpecHandles.Empty();
 }
 
+bool UTLVAbilitySystemComponent::TryActivateAbilityByTag(FGameplayTag AbilityTag)
+{
+	check(AbilityTag.IsValid());
+	TArray<FGameplayAbilitySpec*> AbilitySpecs;
+	GetActivatableGameplayAbilitySpecsByAllMatchingTags(AbilityTag.GetSingleTagContainer(), AbilitySpecs);
+	if (AbilitySpecs.IsEmpty()) return false;
+
+	auto const SpectoActivate = AbilitySpecs[0];
+	check(SpectoActivate);
+
+	if (!SpectoActivate->IsActive())
+	{
+		return TryActivateAbility(SpectoActivate->Handle);
+	}
+	return false;
+}
+
 void UTLVAbilitySystemComponent::EffectApplied(UAbilitySystemComponent* ASC,
                                                FGameplayEffectSpec const& GameplayEffectSpec, FActiveGameplayEffectHandle ActiveGameplayEffectHandle)
 {

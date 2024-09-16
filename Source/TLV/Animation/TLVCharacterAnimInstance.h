@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "TLVAnimInstance.h"
+#include "TLV/Character/TLVBaseCharacter.h"
 #include "TLVCharacterAnimInstance.generated.h"
 
 class ATLVCharacter;
@@ -30,7 +31,7 @@ private:
 	void CalculateTransformationToAttachLeftHandToWeapon();
 	void UpdateProjectileWeaponAttributes();
 	UPROPERTY()
-	TObjectPtr<ATLVCharacter> Character = nullptr;
+	TObjectPtr<ATLVBaseCharacter> Character = nullptr;
 
 protected:
 	

@@ -27,4 +27,11 @@ protected:
 
 	UFUNCTION()
 	virtual  void OnEnemyPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus);
+private:
+	UPROPERTY(EditDefaultsOnly, Category="TLV | Detour")
+	bool bEnableDetourCrowdAvoidance = true;
+	UPROPERTY(EditDefaultsOnly, Category="TLV | Detour", meta = (EditCondition = bEnableDetourCrowdAvoidance, UIMin = "1", UIMax = "4"))
+	int32 DetourCrowdAvoidanceQuality = 4;
+	UPROPERTY(EditDefaultsOnly, Category="TLV | Detour", meta = (EditCondition = bEnableDetourCrowdAvoidance))
+	float CollisonQueryRange = 600;
 };

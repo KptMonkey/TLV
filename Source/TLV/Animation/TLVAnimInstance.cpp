@@ -3,15 +3,15 @@
 
 #include "TLVAnimInstance.h"
 
+#include "TLV/BlueprintFunctionLibrary/TLVBlueprintFunctionLibrary.h"
 #include "TLV/Character/TLVCharacter.h"
 
 
 bool UTLVAnimInstance::DoesOwnerHaveTag(FGameplayTag TagToCheck) const
 {
-	if (APawn* OwningPawn = TryGetPawnOwner())
+	if (auto const OwningPawn = TryGetPawnOwner())
 	{
-		//return UWarriorFunctionLibrary::NativeDoesActorHaveTag(OwningPawn,TagToCheck);
+		return UTLVBlueprintFunctionLibrary::NativeDoesActorHaveTag(OwningPawn,TagToCheck);
 	}
-
 	return false;
 }

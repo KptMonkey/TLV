@@ -26,7 +26,7 @@ void UTLVCharacterAnimInstance::NativeUpdateAnimation(float DeltaTime)
 
 void UTLVCharacterAnimInstance::NativeInitializeAnimation()
 {
-	Character = Cast<ATLVCharacter>(TryGetPawnOwner());
+	Character = Cast<ATLVBaseCharacter>(TryGetPawnOwner());
 	if (Character)
 	{
 		OwningMovementComponent = Character->GetCharacterMovement();
@@ -56,6 +56,4 @@ void UTLVCharacterAnimInstance::CalculateTransformationToAttachLeftHandToWeapon(
 
 void UTLVCharacterAnimInstance::UpdateProjectileWeaponAttributes()
 {
-	if (!Character->ProjectileWeapon) return;
-	AimOffset = Character->ProjectileWeapon->AimOffset;
 }
