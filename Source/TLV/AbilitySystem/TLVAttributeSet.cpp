@@ -8,7 +8,8 @@
 #include "Net/UnrealNetwork.h"
 #include "GameplayEffectExtension.h"
 #include "GameFramework/Character.h"
-
+#include "TLV/Assets/TLVGameplayTags.h"
+#include "TLV/BlueprintFunctionLibrary/TLVBlueprintFunctionLibrary.h"
 
 
 UTLVAttributeSet::UTLVAttributeSet()
@@ -34,7 +35,6 @@ void UTLVAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, f
 	if (Attribute == GetHealthAttribute())
 	{
 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
-		UE_LOG(LogTemp, Warning, TEXT("Health: %f"), NewValue);
 	}
 }
 
@@ -49,11 +49,13 @@ void UTLVAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 	if (Data.EvaluatedData.Attribute == GetDamageTakenAttribute())
 	{
 		auto const NewHealth = FMath::Clamp(GetHealth() - GetDamageTaken(), 0.f, GetMaxHealth());
-		GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Purple, FString(std::to_string(GetHealth()).c_str()));
-		GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Purple, FString(std::to_string(GetDamageTaken()).c_str()));
-		GEngine->AddOnScreenDebugMessage(-1, 3, FColor::Purple, FString(std::to_string(NewHealth).c_str()));
 		SetHealth(NewHealth);
+		if (GetHealth() == 0.f)
+		{
+			UTLVBlueprintFunctionLibrary::AddGameplayTagToActor(Data.Target.GetAvatarActor(), TLVGameplayTags::Shared_Status_Death);
+		}
 	}
+	
 }
 
 void UTLVAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const

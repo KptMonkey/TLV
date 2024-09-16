@@ -74,6 +74,9 @@ namespace TLVGameplayTags
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Ability_Melee)
 
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_HitReact)
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_Death)
+
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Death)
 
 
 }

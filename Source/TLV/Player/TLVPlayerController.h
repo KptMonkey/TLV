@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GenericTeamAgentInterface.h"
 #include "GameFramework/PlayerController.h"
 #include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
 #include "TLV/Input/TLVInputConfig.h"
@@ -16,16 +17,19 @@ struct FInputActionValue;
  * 
  */
 UCLASS()
-class TLV_API ATLVPlayerController : public APlayerController
+class TLV_API ATLVPlayerController : public APlayerController, public IGenericTeamAgentInterface
 {
 	GENERATED_BODY()
 public:
 	ATLVPlayerController();
 	virtual void PlayerTick(float DeltaTime) override;
+	virtual FGenericTeamId GetGenericTeamId() const override;
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 private:
+	FGenericTeamId TeamId = 0;
+	
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputMappingContext> TLVContext;
 

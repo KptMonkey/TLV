@@ -17,6 +17,11 @@ void ATLVPlayerController::PlayerTick(float DeltaTime)
 	Super::PlayerTick(DeltaTime);
 }
 
+FGenericTeamId ATLVPlayerController::GetGenericTeamId() const
+{
+	return TeamId;
+}
+
 void ATLVPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
