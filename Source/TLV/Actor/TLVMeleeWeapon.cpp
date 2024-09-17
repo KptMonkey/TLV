@@ -27,7 +27,7 @@ void ATLVMeleeWeapon::OnCollisionBoxBeginOverlap(UPrimitiveComponent* Overlapped
 	{
 		if (Pawn != HitPawn)
 		{
-			OnWeaponHitTarget.ExecuteIfBound(OtherActor);
+			OnHitTarget.ExecuteIfBound(OtherActor);
 		}
 	}
 }
@@ -40,19 +40,10 @@ void ATLVMeleeWeapon::OnCollisionBoxEndOverlap(UPrimitiveComponent* OverlappedCo
 	{
 		if (Pawn != HitPawn)
 		{
-			OnWeaponPulledFromTarget.ExecuteIfBound(OtherActor);
+			OnPulledFromTarget.ExecuteIfBound(OtherActor);
 		}
 	}
 }
 
-void ATLVMeleeWeapon::AssignGrantedAbilitySpecHandles(TArray<FGameplayAbilitySpecHandle> const& AbilitySpecHandles)
-{
-		GrantedAbilitySpecHandles = AbilitySpecHandles;
-}
-
-TArray<FGameplayAbilitySpecHandle> ATLVMeleeWeapon::GetGrantedAbilitySpecHandles() const
-{
-	return GrantedAbilitySpecHandles;
-}
 
 

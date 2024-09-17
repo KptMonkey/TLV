@@ -25,3 +25,10 @@ enum class ETLVSuccessType : uint8
 	Success,
 	Failed
 };
+
+UENUM()
+enum class ETLVWeaponType : uint8
+{
+	Weapon,
+	Hand
+};

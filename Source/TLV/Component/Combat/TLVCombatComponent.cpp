@@ -12,13 +12,12 @@ void UTLVCombatComponent::RegisterSpawnedWeapon(FGameplayTag WeaponTagToRegister
 	check(WeaponToRegister);
 	CarriedWeapons.Emplace(WeaponTagToRegister, WeaponToRegister);
 
-	WeaponToRegister->OnWeaponHitTarget.BindUObject(this, &ThisClass::OnHitTargetActor);
-	WeaponToRegister->OnWeaponPulledFromTarget.BindUObject(this, &ThisClass::OnPulledFromTargetActor);
+	WeaponToRegister->OnHitTarget.BindUObject(this, &ThisClass::OnHitTargetActor);
+	WeaponToRegister->OnPulledFromTarget.BindUObject(this, &ThisClass::OnPulledFromTargetActor);
 	if (RegisterEquippedWeapon)
 	{
 		EquippedWeaponTag = WeaponTagToRegister;
 	}
-	GEngine->AddOnScreenDebugMessage(-123123, 4, FColor::Green, "Register");
 }
 
 ATLVMeleeWeapon* UTLVCombatComponent::GetCarriedWeapon(FGameplayTag WeaponTag) const
