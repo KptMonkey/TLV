@@ -81,5 +81,7 @@ namespace TLVGameplayTags
 	
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Status_Strafing)
 
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Weapon_LeftHand)	
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Weapon_RightHand)	
 
 }

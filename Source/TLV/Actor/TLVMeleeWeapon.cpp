@@ -45,5 +45,11 @@ void ATLVMeleeWeapon::OnCollisionBoxEndOverlap(UPrimitiveComponent* OverlappedCo
 	}
 }
 
+void ATLVMeleeWeapon::ToggleCollision(bool bEnable)
+{
+	auto const CollisionEnabled = bEnable ? ECollisionEnabled::QueryOnly : ECollisionEnabled::NoCollision;
+	WeaponCollisionBox->SetCollisionEnabled(CollisionEnabled);
+}
+
 
 

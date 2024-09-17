@@ -24,6 +24,7 @@ public:
 	void AssignGrantedAbilitySpecHandles(TArray<FGameplayAbilitySpecHandle> const& AbilitySpecHandles);
 	UFUNCTION(BlueprintPure)
 	TArray<FGameplayAbilitySpecHandle> GetGrantedAbilitySpecHandles() const;
+	virtual void ToggleCollision(bool bEnable);
 
 protected:
 	TArray<FGameplayAbilitySpecHandle> GrantedAbilitySpecHandles;

@@ -2,11 +2,14 @@
 
 
 #include "TLVCombatComponent.h"
+
+#include "TLV/Actor/TLVMeleeHand.h"
 #include "TLV/Actor/TLVMeleeWeapon.h"
+#include "TLV/Assets/TLVGameplayTags.h"
 
 
 void UTLVCombatComponent::RegisterSpawnedWeapon(FGameplayTag WeaponTagToRegister,
-	ATLVMeleeWeapon* WeaponToRegister, bool RegisterEquippedWeapon)
+                                                ATLVMeleeWeapon* WeaponToRegister, bool RegisterEquippedWeapon)
 {
 	checkf(!CarriedWeapons.Contains(WeaponTagToRegister), TEXT("Weapon already exist"));
 	check(WeaponToRegister);
@@ -18,6 +21,26 @@ void UTLVCombatComponent::RegisterSpawnedWeapon(FGameplayTag WeaponTagToRegister
 	{
 		EquippedWeaponTag = WeaponTagToRegister;
 	}
+}
+
+void UTLVCombatComponent::RegisterHand(FGameplayTag HandTagToRegister, ATLVMeleeHand* HandToRegister)
+{
+	checkf(!Hands.Contains(HandTagToRegister), TEXT("Weapon already exist"));
+	check(HandToRegister);
+	Hands.Emplace(HandTagToRegister, HandToRegister);
+
+	HandToRegister->OnHitTarget.BindUObject(this, &ThisClass::OnHitTargetActor);
+	HandToRegister->OnPulledFromTarget.BindUObject(this, &ThisClass::OnPulledFromTargetActor);
+}
+
+ATLVMeleeHand* UTLVCombatComponent::GetHand(FGameplayTag HandTag) const
+{
+	if (Hands.Contains(HandTag))
+	{
+		auto const Hand = Hands.Find(HandTag);
+		return * Hand;
+	}
+	return nullptr;
 }
 
 ATLVMeleeWeapon* UTLVCombatComponent::GetCarriedWeapon(FGameplayTag WeaponTag) const
@@ -60,16 +83,27 @@ void UTLVCombatComponent::ToggleWeaponCollision(bool bEnable, EToggleDamageType 
 			break;
 		}
 	case EToggleDamageType::LEFT_HAND:
-		break;
+		{
+			auto const LeftHand = GetHand(TLVGameplayTags::Enemy_Weapon_LeftHand);
+			LeftHand->ToggleCollision(bEnable);
+			break;
+			
+		}
 	case EToggleDamageType::RIGHT_HAND:
-		break;
+		{
+			auto const RightHand = GetHand(TLVGameplayTags::Enemy_Weapon_RightHand);
+			RightHand->ToggleCollision(bEnable);
+			break;
+		}
 	}
 }
 
 void UTLVCombatComponent::OnHitTargetActor(AActor* TargetActor)
 {
+	GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Orange, "XXXXx");
 }
 
 void UTLVCombatComponent::OnPulledFromTargetActor(AActor* TargetActor)
 {
+	GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Orange, "XXXXx");
 }

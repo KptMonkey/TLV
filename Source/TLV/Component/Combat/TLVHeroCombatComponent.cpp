@@ -10,12 +10,12 @@
 
 ATLVMeleeWeapon* UTLVHeroCombatComponent::GetHeroCarriedWeaponByTag(FGameplayTag WeaponTag) const
 {
-	return GetCarriedWeapon(WeaponTag);
+	return Cast<ATLVMeleeWeapon>(GetCarriedWeapon(WeaponTag));
 }
 
 ATLVMeleeWeapon* UTLVHeroCombatComponent::GetHeroEquippedWeapon() const
 {
-	return GetEquippedWeapon();
+	return  Cast<ATLVMeleeWeapon>(GetEquippedWeapon());
 }
 
 float UTLVHeroCombatComponent::GetHeroEquippedWeaponDamageLevel(int Level) const

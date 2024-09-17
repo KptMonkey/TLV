@@ -14,3 +14,7 @@ TArray<FGameplayAbilitySpecHandle> ATLVMeleeBase::GetGrantedAbilitySpecHandles()
 {
 	return GrantedAbilitySpecHandles;
 }
+
+void ATLVMeleeBase::ToggleCollision(bool bEnable)
+{
+}

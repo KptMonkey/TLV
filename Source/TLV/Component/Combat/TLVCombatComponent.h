@@ -7,6 +7,7 @@
 #include "TLV/Component/TLVBaseComponent.h"
 #include "TLVCombatComponent.generated.h"
 
+class ATLVMeleeHand;
 class ATLVMeleeWeapon;
 
 UENUM(BlueprintType)
@@ -24,17 +25,25 @@ public:
 	UFUNCTION(BlueprintCallable, Category= "TLV | Combat")
 	void RegisterSpawnedWeapon(FGameplayTag WeaponTagToRegister, ATLVMeleeWeapon* WeaponToRegister, bool RegisterEquippedWeapon = false);
 	UFUNCTION(BlueprintCallable, Category= "TLV | Combat")
+	void RegisterHand(FGameplayTag HandTagToRegister, ATLVMeleeHand* HandToRegister);
+
+	UFUNCTION(BlueprintCallable, Category= "TLV | Combat")
+	ATLVMeleeHand* GetHand(FGameplayTag HandTag) const;
+	
+	UFUNCTION(BlueprintCallable, Category= "TLV | Combat")
 	ATLVMeleeWeapon* GetCarriedWeapon(FGameplayTag WeaponTag) const;
-	UPROPERTY(BlueprintReadWrite, Category= "TLV | Combat")
-	FGameplayTag EquippedWeaponTag;
 	UFUNCTION(BlueprintCallable, Category= "TLV | Combat")
 	ATLVMeleeWeapon* GetEquippedWeapon() const;
 	UFUNCTION(BlueprintCallable, Category= "TLV | Combat")
 	void ToggleWeaponCollision(bool bEnable, EToggleDamageType ToggleDamageType = EToggleDamageType::CURRENT_EQUIPPED_WEAPON);
 	virtual void OnHitTargetActor(AActor* TargetActor);
 	virtual void OnPulledFromTargetActor(AActor* TargetActor);
+
+	UPROPERTY(BlueprintReadWrite, Category= "TLV | Combat")
+	FGameplayTag EquippedWeaponTag;
 protected:
 	TArray<TObjectPtr<AActor>> OverlappedActors;
 private:
 	TMap<FGameplayTag, TObjectPtr<ATLVMeleeWeapon>> CarriedWeapons;
+	TMap<FGameplayTag, TObjectPtr<ATLVMeleeHand>> Hands;
 };

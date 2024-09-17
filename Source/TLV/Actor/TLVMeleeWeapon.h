@@ -26,8 +26,10 @@ protected:
 	virtual void OnCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	UFUNCTION()
 	virtual  void OnCollisionBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Weapons")
 	FTLVHeroWeaponData HeroWeaponData;
 	FORCEINLINE UBoxComponent* GetWeaponCollisionBox() { return WeaponCollisionBox;}
+	virtual void ToggleCollision(bool bEnable) override;
 };
