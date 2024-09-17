@@ -4,6 +4,7 @@
 #include "TLVBlueprintFunctionLibrary.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
+#include "GenericTeamAgentInterface.h"
 #include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
 #include "TLV/Component/Combat/TLVCombatInterface.h"
 
@@ -58,4 +59,16 @@ UTLVCombatComponent* UTLVBlueprintFunctionLibrary::BP_GetCombatComponentFromActo
 	auto const CombatComponent =  NativeGetCombatComponentFromActor(Actor);
 	ValidType = CombatComponent ? ETLVValidType::VALID : ETLVValidType::INVALID;
 	return CombatComponent;
+}
+
+bool UTLVBlueprintFunctionLibrary::IsTargetPawnHostile(APawn* QueryPawn, APawn* TargetPawn)
+{
+	check(QueryPawn && TargetPawn);
+	auto const QueryTeamAgent = Cast<IGenericTeamAgentInterface>(QueryPawn->GetController());
+	auto const TargetTeamAgent = Cast<IGenericTeamAgentInterface>(TargetPawn->GetController());
+	if (QueryTeamAgent && TargetTeamAgent)
+	{
+		return QueryTeamAgent->GetGenericTeamId() != TargetTeamAgent->GetGenericTeamId();
+	}
+	return false;
 }

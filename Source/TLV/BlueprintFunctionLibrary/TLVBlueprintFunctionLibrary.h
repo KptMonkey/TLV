@@ -35,4 +35,6 @@ public:
 	static UTLVCombatComponent* NativeGetCombatComponentFromActor(AActor* Actor);
 	UFUNCTION(BlueprintCallable, Category= "TLV | FunctionLibrary", meta = (DisplayName = "GetCombatComponentFromActor", ExpandEnumAsExecs = "ValidType"))
 	static UTLVCombatComponent* BP_GetCombatComponentFromActor(AActor* Actor, ETLVValidType& ValidType);
+	UFUNCTION(BlueprintPure, Category= "TLV | FunctionLibrary")
+	static bool IsTargetPawnHostile(APawn* QueryPawn, APawn* TargetPawn);
 };

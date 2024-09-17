@@ -5,7 +5,7 @@
 
 #include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
 #include "TLV/AbilitySystem/TLVAttributeSet.h"
-#include "TLV/Player/TLVPlayerState.h"
+#include "MotionWarpingComponent.h"
 
 // Sets default values
 ATLVBaseCharacter::ATLVBaseCharacter()
@@ -13,7 +13,7 @@ ATLVBaseCharacter::ATLVBaseCharacter()
 	PrimaryActorTick.bCanEverTick = false;
 	AbilitySystemComponent = CreateDefaultSubobject<UTLVAbilitySystemComponent>("TLVAbilitySystemComponent");
 	AttributeSet = CreateDefaultSubobject<UTLVAttributeSet>("TLVAttributeSet");
-	
+	MotionWarpingComponent = CreateDefaultSubobject<UMotionWarpingComponent>(TEXT("MotionWarpingComponent"));
 }
 
 UAbilitySystemComponent* ATLVBaseCharacter::GetAbilitySystemComponent() const

@@ -4,6 +4,7 @@
 #include "TLVMeleeHand.h"
 
 #include "Components/BoxComponent.h"
+#include "TLV/BlueprintFunctionLibrary/TLVBlueprintFunctionLibrary.h"
 
 
 // Sets default values
@@ -31,7 +32,7 @@ void ATLVMeleeHand::OnCollisionBoxBeginOverlap(UPrimitiveComponent* OverlappedCo
 	checkf(Pawn, TEXT("Weapon has no instigator"))
 	if (auto const HitPawn = Cast<APawn>(OtherActor))
 	{
-		if (Pawn != HitPawn)
+		if (UTLVBlueprintFunctionLibrary::IsTargetPawnHostile(Pawn, HitPawn))
 		{
 			OnHitTarget.ExecuteIfBound(OtherActor);
 		}
@@ -45,7 +46,7 @@ void ATLVMeleeHand::OnCollisionBoxEndOverlap(UPrimitiveComponent* OverlappedComp
 	checkf(Pawn, TEXT("Weapon has no instigator"))
 	if (auto const HitPawn = Cast<APawn>(OtherActor))
 	{
-		if (Pawn != HitPawn)
+		if (UTLVBlueprintFunctionLibrary::IsTargetPawnHostile(Pawn, HitPawn))
 		{
 			OnPulledFromTarget.ExecuteIfBound(OtherActor);
 		}

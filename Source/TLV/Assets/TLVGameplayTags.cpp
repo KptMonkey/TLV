@@ -115,8 +115,9 @@ namespace TLVGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Ability_Death, "Shared.Ability.Death")
 
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Death, "Shared.Status.Death")
-
+	
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Status_Strafing, "Enemy.Status.Strafing")
+	UE_DEFINE_GAMEPLAY_TAG(Enemy_Status_Under_Attack, "Enemy.Status.Unter.Attack")
 
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon_LeftHand, "Enemy.Weapon.LeftHand")
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon_RightHand, "Enemy.Weapon.RightHand")

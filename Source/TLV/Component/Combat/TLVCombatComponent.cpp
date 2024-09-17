@@ -100,10 +100,8 @@ void UTLVCombatComponent::ToggleWeaponCollision(bool bEnable, EToggleDamageType 
 
 void UTLVCombatComponent::OnHitTargetActor(AActor* TargetActor)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Orange, "XXXXx");
 }
 
 void UTLVCombatComponent::OnPulledFromTargetActor(AActor* TargetActor)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Orange, "XXXXx");
 }

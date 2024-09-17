@@ -3,34 +3,38 @@
 
 #include "TLVEnemyCombatComponent.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
+#include "TLV/Assets/TLVGameplayTags.h"
 
-// Sets default values for this component's properties
-UTLVEnemyCombatComponent::UTLVEnemyCombatComponent()
+void UTLVEnemyCombatComponent::OnHitTargetActor(AActor* TargetActor)
 {
-	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
-	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = true;
+	if (OverlappedActors.Contains(TargetActor)) return;
 
-	// ...
-}
+	OverlappedActors.AddUnique(TargetActor);
 
+	bool bIsValidBlock = false;
+	const bool bIsPlayerBlocking = false;
+	const bool bIsMyAttackUnblockable = false;
 
-// Called when the game starts
-void UTLVEnemyCombatComponent::BeginPlay()
-{
-	Super::BeginPlay();
-
-	// ...
+	if (bIsPlayerBlocking && !bIsMyAttackUnblockable)
+	{
+		
+	}
+	FGameplayEventData EventData;
+	EventData.Instigator = GetOwningPawn();
+	EventData.Target = TargetActor;
+	if (bIsValidBlock)
+	{
+		
+	}
+	else
+	{
+		UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(GetOwningPawn(), TLVGameplayTags::Shared_Event_Melee_Hit, EventData);
+	}
 	
 }
 
-
-// Called every frame
-void UTLVEnemyCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType,
-                                             FActorComponentTickFunction* ThisTickFunction)
+void UTLVEnemyCombatComponent::OnPulledFromTargetActor(AActor* TargetActor)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	// ...
+	GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Orange, "XXXXx");
 }
-

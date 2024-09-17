@@ -8,7 +8,7 @@ public class TLV : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 	
-		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "GameplayAbilities", "AIModule", "UMG" });
+		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput", "GameplayAbilities", "AIModule", "UMG", "MotionWarping" });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  "GameplayTags", "GameplayTasks", "NavigationSystem", "Niagara", "AnimGraphRuntime", "AnimGraphRuntime", "AIModule", "UMG"});
 

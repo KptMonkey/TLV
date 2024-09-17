@@ -14,6 +14,7 @@ class UTLVAttributeSet;
 class UTLVAbilitySystemComponent;
 class UAttributeSet;
 class UTLVDataAssetStartupData;
+class UMotionWarpingComponent;
 UCLASS()
 class TLV_API ATLVBaseCharacter : public ACharacter, public IAbilitySystemInterface, public ITLVCombatInterface
 {
@@ -57,4 +58,6 @@ protected:
 	TObjectPtr<USkeletalMeshComponent> VisibleMesh;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TLV | Animated Mesh")
 	TObjectPtr<USkeletalMeshComponent> AnimatedMesh;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="TLV | Motionwarping")
+	TObjectPtr<UMotionWarpingComponent> MotionWarpingComponent;
 };
