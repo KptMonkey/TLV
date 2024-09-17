@@ -5,7 +5,9 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "GenericTeamAgentInterface.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
+#include "TLV/Assets/TLVGameplayTags.h"
 #include "TLV/Component/Combat/TLVCombatInterface.h"
 
 TObjectPtr<UTLVAbilitySystemComponent> UTLVBlueprintFunctionLibrary::NativeGetTLVASCFromActor(
@@ -71,4 +73,42 @@ bool UTLVBlueprintFunctionLibrary::IsTargetPawnHostile(APawn* QueryPawn, APawn* 
 		return QueryTeamAgent->GetGenericTeamId() != TargetTeamAgent->GetGenericTeamId();
 	}
 	return false;
+}
+
+FGameplayTag UTLVBlueprintFunctionLibrary::ComputeHitReactDirectionTag(AActor* Instigator, AActor* Target,
+	float& OutAngleDifference)
+{
+	check(Instigator && Target);
+
+	const FVector TargetForward = Target->GetActorForwardVector();
+	const FVector InstigatorToAttackerNormalized = (Instigator->GetActorLocation() - Instigator->GetActorLocation()).GetSafeNormal();
+
+	const float DotResult = FVector::DotProduct(TargetForward,InstigatorToAttackerNormalized);
+	OutAngleDifference = UKismetMathLibrary::DegAcos(DotResult);
+
+	const FVector CrossResult = FVector::CrossProduct(TargetForward,InstigatorToAttackerNormalized);
+
+	if (CrossResult.Z < 0.f)
+	{
+		OutAngleDifference *= -1.f;
+	}
+
+	if (OutAngleDifference>=-45.f && OutAngleDifference <=45.f)
+	{
+		return TLVGameplayTags::Shared_Event_HitReact_Light_Front_Head;
+	}
+	else if (OutAngleDifference<-45.f && OutAngleDifference>=-135.f)
+	{
+		return TLVGameplayTags::Shared_Event_HitReact_Light_Left_Head_Down;
+	}
+	else if (OutAngleDifference<-135.f || OutAngleDifference>135.f)
+	{
+		return TLVGameplayTags::Shared_Event_HitReact_Light_Right_Head_Down;
+	}
+	else if(OutAngleDifference>45.f && OutAngleDifference<=135.f)
+	{
+		return TLVGameplayTags::Shared_Event_HitReact_Light_Right_Head_Down;
+	}
+
+	return TLVGameplayTags::Shared_Event_HitReact_Light_Front_Head;
 }

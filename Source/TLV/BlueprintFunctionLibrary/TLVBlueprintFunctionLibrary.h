@@ -37,4 +37,6 @@ public:
 	static UTLVCombatComponent* BP_GetCombatComponentFromActor(AActor* Actor, ETLVValidType& ValidType);
 	UFUNCTION(BlueprintPure, Category= "TLV | FunctionLibrary")
 	static bool IsTargetPawnHostile(APawn* QueryPawn, APawn* TargetPawn);
+	UFUNCTION(BlueprintPure, Category = "TLV  |FunctionLibrary")
+	static FGameplayTag ComputeHitReactDirectionTag(AActor* Instigator, AActor* Target,float& OutAngleDifference);
 };

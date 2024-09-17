@@ -66,8 +66,10 @@ namespace TLVGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_UnequipAxe, "InputTag.UnequipAxe")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_LightAttack_Axe, "InputTag.LightAttack.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_HeavyAttack_Axe, "InputTag.HeavyAttack.Axe")
-	
-	
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Dodge, "InputTag.Dodge")
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Toggle, "InputTag.Toggle")
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Toggle_TargetLock, "InputTag.Toggle.TargetLock")
+
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Equip_Axe, "Player.Event.Equip.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Unequip_Axe, "Player.Event.Unequip.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Hit_Pause, "Player.Event.Hit.Pause")
@@ -77,10 +79,14 @@ namespace TLVGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Melee_Light_Axe, "Player.Ability.Attack.Melee.Light.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Melee_Heavy_Axe, "Player.Ability.Attack.Melee.Heavy.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Hit_Pause, "Player.Ability.Hit.Pause")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Dodge, "Player.Ability.Dodge")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_TargetLock, "Player.Ability.TargetLock")
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_Axe, "Player.Weapon.Axe")
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_JumpToFinisher, "Player.Status.JumpToFinisher")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Dodge, "Player.Status.Dodge")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_TargetLock, "Player.Status.TargetLock")
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_SetByCaller_AttackType_Light, "Player.SetByCaller.AttackType.Light")
 	UE_DEFINE_GAMEPLAY_TAG(Player_SetByCaller_AttackType_Heavy, "Player.SetByCaller.AttackType.Heavy")
