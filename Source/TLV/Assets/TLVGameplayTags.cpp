@@ -62,6 +62,7 @@ void FTLVGameplayTags::InitializeNativeGameplayTags()
 namespace TLVGameplayTags
 {
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Move, "InputTag.Move")
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Look, "InputTag.Look")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_EquipAxe, "InputTag.EquipAxe")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_UnequipAxe, "InputTag.UnequipAxe")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_LightAttack_Axe, "InputTag.LightAttack.Axe")
@@ -69,11 +70,14 @@ namespace TLVGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Dodge, "InputTag.Dodge")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Toggle, "InputTag.Toggle")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Toggle_TargetLock, "InputTag.Toggle.TargetLock")
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_SwitchTarget, "InputTag.SwitchTarget")
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Equip_Axe, "Player.Event.Equip.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Unequip_Axe, "Player.Event.Unequip.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Hit_Pause, "Player.Event.Hit.Pause")
-
+	UE_DEFINE_GAMEPLAY_TAG(Player_Event_SwitchTarget_Right, "Player.Event.SwitchTarget.Right")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Event_SwitchTarget_Left, "Player.Event.SwitchTarget.Left")
+	
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Equip_Axe, "Player.Ability.Equip.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Unequip_Axe, "Player.Ability.Unequip.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Melee_Light_Axe, "Player.Ability.Attack.Melee.Light.Axe")

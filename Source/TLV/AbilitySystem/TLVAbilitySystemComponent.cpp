@@ -4,6 +4,7 @@
 #include "TLVAbilitySystemComponent.h"
 
 #include "Ability/TLVGameplayAbility.h"
+#include "TLV/Assets/TLVGameplayTags.h"
 #include "TLV/Common/TLVStructTypes.h"
 
 void UTLVAbilitySystemComponent::AbilityActorInfoSet()
@@ -85,7 +86,21 @@ void UTLVAbilitySystemComponent::OnAbilityInputPressed(FGameplayTag const& Input
 	{
 		if (!AbilitySpec.DynamicAbilityTags.HasTag(InputTag)) continue;
 
-		TryActivateAbility(AbilitySpec.Handle);
+		if (InputTag.MatchesTag(TLVGameplayTags::InputTag_Toggle))
+		{
+			if (AbilitySpec.IsActive())
+			{
+				CancelAbilityHandle(AbilitySpec.Handle);
+			}
+			else
+			{
+				TryActivateAbility(AbilitySpec.Handle);
+			}
+		}
+		else
+		{
+			TryActivateAbility(AbilitySpec.Handle);
+		}
 	}
 }
 

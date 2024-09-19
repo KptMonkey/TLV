@@ -11,8 +11,8 @@ void UTLVCharacterAnimInstance::NativeUpdateAnimation(float DeltaTime)
 {
 	if (!Character) return;
 
-	CalculateTransformationToAttachLeftHandToWeapon();
-	UpdateProjectileWeaponAttributes();
+//	CalculateTransformationToAttachLeftHandToWeapon();
+//	UpdateProjectileWeaponAttributes();
 	if (Character->Weapon)
 	{
 		// Draw Debug Line

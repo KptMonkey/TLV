@@ -3,6 +3,7 @@
 
 #include "TLVCharacter.h"
 
+#include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -15,19 +16,19 @@
 #include "TLV/Player/TLVPlayerState.h"
 #include "TLV/UI/HUD/TLVHUD.h"
 #include "TLV/Assets/TLVDataAssetHeroStartUpData.h"
+#include "TLV/Assets/TLVGameplayTags.h"
 
 ATLVCharacter::ATLVCharacter()
 {
-	GetCharacterMovement()->bOrientRotationToMovement = true;
-	GetCharacterMovement()->RotationRate = FRotator(0.f, 400.f, 0.f);
-	GetCharacterMovement()->bConstrainToPlane = true;
-	GetCharacterMovement()->bSnapToPlaneAtStart = true;
-
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
 
 	HeroCombatComponent = CreateDefaultSubobject<UTLVHeroCombatComponent>("CombatComponent");
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->RotationRate = FRotator(0.f,500.f,0.f);
+	GetCharacterMovement()->MaxWalkSpeed = 400.f;
+	GetCharacterMovement()->BrakingDecelerationWalking = 2000.f;
 }
 
 void ATLVCharacter::PossessedBy(AController* NewController)
@@ -89,8 +90,8 @@ void ATLVCharacter::TraceUnderCrosshair(FHitResult& HitResult)
 void ATLVCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-		TraceUnderCrosshair(TraceHitResult);
-		OnRep_DefendsBiteAttempt();
+	//	TraceUnderCrosshair(TraceHitResult);
+	//	OnRep_DefendsBiteAttempt();
 }
 
 void ATLVCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -119,7 +120,12 @@ void ATLVCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
 	auto TLVInputComponent = CastChecked<UTLVInputComponent>(PlayerInputComponent);
 
 	TLVInputComponent->BindAbilityInputAction(InputConfigDataAsset, this, &ThisClass::Input_AbilityInputPressed, &ThisClass::Input_AbilityInputReleased);
-	
+	TLVInputComponent->BindNativeInputAction(InputConfigDataAsset,TLVGameplayTags::InputTag_Move,ETriggerEvent::Triggered,this,&ThisClass::Input_Move);
+	TLVInputComponent->BindNativeInputAction(InputConfigDataAsset,TLVGameplayTags::InputTag_Look,ETriggerEvent::Triggered,this,&ThisClass::Input_Look);
+
+	TLVInputComponent->BindNativeInputAction(InputConfigDataAsset,TLVGameplayTags::InputTag_SwitchTarget,ETriggerEvent::Triggered,this,&ThisClass::Input_SwitchTargetTriggered);
+	TLVInputComponent->BindNativeInputAction(InputConfigDataAsset,TLVGameplayTags::InputTag_SwitchTarget,ETriggerEvent::Completed,this,&ThisClass::Input_SwitchTargetCompleted);
+
 }
 
 TObjectPtr<UTLVCombatComponent> ATLVCharacter::GetCombatComponent() const
@@ -143,6 +149,60 @@ void ATLVCharacter::InitAbilityComponent()
 	if (!HasAuthority()) return;
 
 	AbilitySystemComponent->AddCharacterAbilities(StartupAbilities);
+}
+
+void ATLVCharacter::Input_Move(const FInputActionValue& InputActionValue)
+{
+	const FVector2D MovementVector = InputActionValue.Get<FVector2D>();
+
+	const FRotator MovementRotation(0.f,Controller->GetControlRotation().Yaw,0.f);
+
+	if (MovementVector.Y != 0.f)
+	{
+		const FVector ForwardDirection = MovementRotation.RotateVector(FVector::ForwardVector);
+
+		AddMovementInput(ForwardDirection,MovementVector.Y);
+	}
+
+	if (MovementVector.X != 0.f)
+	{
+		const FVector RightDirection = MovementRotation.RotateVector(FVector::RightVector);
+
+		AddMovementInput(RightDirection,MovementVector.X);
+	}
+}
+
+void ATLVCharacter::Input_Look(const FInputActionValue& InputActionValue)
+{
+	const FVector2D LookAxisVector = InputActionValue.Get<FVector2D>();
+	
+	if (LookAxisVector.X != 0.f)
+	{
+		AddControllerYawInput(LookAxisVector.X);
+	}
+
+	if (LookAxisVector.Y != 0.f)
+	{
+		AddControllerPitchInput(LookAxisVector.Y);
+	}
+}
+
+void ATLVCharacter::Input_SwitchTargetTriggered(const FInputActionValue& InputActionValue)
+{
+	SwitchDirection = InputActionValue.Get<FVector2D>();
+}
+
+void ATLVCharacter::Input_SwitchTargetCompleted(const FInputActionValue& InputActionValue)
+{
+	FGameplayEventData Data;
+
+	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
+		this,
+		SwitchDirection.X > 0.f ? TLVGameplayTags::Player_Event_SwitchTarget_Right : TLVGameplayTags::Player_Event_SwitchTarget_Left,
+		Data
+	);
+	GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Green, SwitchDirection.ToString());
+
 }
 
 void ATLVCharacter::Input_AbilityInputPressed(FGameplayTag InputTag)

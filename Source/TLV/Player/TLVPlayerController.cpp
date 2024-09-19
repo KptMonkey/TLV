@@ -30,11 +30,13 @@ void ATLVPlayerController::BeginPlay()
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 	if (!Subsystem) return;
 	Subsystem->AddMappingContext(TLVContext, 0);
-	
+	/*
 	FInputModeGameAndUI InputModeData;
 	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
 	InputModeData.SetHideCursorDuringCapture(false);
-	SetInputMode(InputModeData);}
+	SetInputMode(InputModeData);
+	*/
+	}
 
 void ATLVPlayerController::SetupInputComponent()
 {
@@ -61,6 +63,7 @@ void ATLVPlayerController::ABilityInputTagHeld(FGameplayTag InputTag)
 
 void ATLVPlayerController::Move(const FInputActionValue& InputActionValue)
 {
+	/*
 	const FVector2D InputAxisVector = InputActionValue.Get<FVector2D>();
 	const FRotator Rotation = GetControlRotation();
 	const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
@@ -73,6 +76,7 @@ void ATLVPlayerController::Move(const FInputActionValue& InputActionValue)
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
 	}
+	*/
 }
 
 TObjectPtr<UTLVAbilitySystemComponent> ATLVPlayerController::GetASC()
