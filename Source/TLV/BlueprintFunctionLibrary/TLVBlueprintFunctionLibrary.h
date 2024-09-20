@@ -6,8 +6,10 @@
 #include "GameplayTagContainer.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "TLV/Common/TLVEnumTypes.h"
+#include "TLV/Common/TLVStructTypes.h"
 #include "TLVBlueprintFunctionLibrary.generated.h"
 
+class UTLVGameInstance;
 class UTLVCombatComponent;
 class UTLVAbilitySystemComponent;
 
@@ -37,6 +39,17 @@ public:
 	static UTLVCombatComponent* BP_GetCombatComponentFromActor(AActor* Actor, ETLVValidType& ValidType);
 	UFUNCTION(BlueprintPure, Category= "TLV | FunctionLibrary")
 	static bool IsTargetPawnHostile(APawn* QueryPawn, APawn* TargetPawn);
-	UFUNCTION(BlueprintPure, Category = "TLV  |FunctionLibrary")
+	UFUNCTION(BlueprintPure, Category = "TLV  | FunctionLibrary")
 	static FGameplayTag ComputeHitReactDirectionTag(AActor* Instigator, AActor* Target,float& OutAngleDifference);
+	UFUNCTION(BlueprintPure, Category = "TLV  | FunctionLibrary", meta = (WorldContext = "WorldContextObject"))
+	static UTLVGameInstance* GetTLVGameInstance(UObject* const WorldContextObject);
+	/**
+	 * 
+	 * @param GraphicSettings 
+	 */
+	UFUNCTION(BlueprintCallable,Category = "Warrior|FunctionLibrary")
+	static void SaveCurrentGraphicSetting(FTLVGraphicSettings GraphicSettings);
+
+	UFUNCTION(BlueprintCallable,Category = "Warrior|FunctionLibrary")
+	static bool TryLoadSavedGraphicSetting(FTLVGraphicSettings& GraphicSettings);
 };

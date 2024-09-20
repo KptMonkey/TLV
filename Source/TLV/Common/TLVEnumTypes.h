@@ -32,3 +32,15 @@ enum class ETLVWeaponType : uint8
 	Weapon,
 	Hand
 };
+
+UENUM()
+enum class ETLVGraphicSettings: uint8
+{
+	Shadow,
+	Shading,
+	Texture,
+	GlobalIllumination,
+	Foliage,
+	ViewDistance,
+	VFX
+};

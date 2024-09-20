@@ -40,3 +40,28 @@ struct FTLVGameplayMontage
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, meta = (Categories = "TLV | Animation"))
 	FGameplayTag GameplayTag;
 };
+
+USTRUCT(BlueprintType)
+struct FTLVGraphicSettings
+{
+	GENERATED_BODY()
+
+	UPROPERTY(BlueprintReadWrite)
+	int AntiAliasing = 1;
+	UPROPERTY(BlueprintReadWrite)
+	int ShadowQuality = 1;
+	UPROPERTY(BlueprintReadWrite)
+	int ShadingQuality = 1;
+	UPROPERTY(BlueprintReadWrite)
+	int TextureQuality = 1;
+	UPROPERTY(BlueprintReadWrite)
+	int ViewDistanceQuality = 1;
+	UPROPERTY(BlueprintReadWrite)
+	int VFXQuality = 1;
+	UPROPERTY(BlueprintReadWrite)
+	int FoliageQuality = 1;
+	UPROPERTY(BlueprintReadWrite)
+	int GIQuality = 1;
+	UPROPERTY(BlueprintReadWrite)
+	int ReflectionQuality = 1;
+};

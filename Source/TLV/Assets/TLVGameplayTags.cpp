@@ -131,4 +131,8 @@ namespace TLVGameplayTags
 
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon_LeftHand, "Enemy.Weapon.LeftHand")
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon_RightHand, "Enemy.Weapon.RightHand")
+	
+	UE_DEFINE_GAMEPLAY_TAG(GameData_Level_TestGameModeMap, "GameData.Level.TestGameModeMap")
+	UE_DEFINE_GAMEPLAY_TAG(GameData_Level_MainMenuMap, "GameData.Level.MainMenuMap")
+	UE_DEFINE_GAMEPLAY_TAG(GameData_SaveGame_Slot_UI, "GameData.SaveGame.Slot.UI")
 }

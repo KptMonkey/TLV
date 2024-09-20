@@ -3,12 +3,17 @@
 
 #include "TLVBlueprintFunctionLibrary.h"
 
+#include <string>
+
+#include "TLV/GameInstance/TLVGameInstance.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "GenericTeamAgentInterface.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "TLV/AbilitySystem/TLVAbilitySystemComponent.h"
 #include "TLV/Assets/TLVGameplayTags.h"
 #include "TLV/Component/Combat/TLVCombatInterface.h"
+#include "TLV/SaveGame/TLVUISaveGame.h"
 
 TObjectPtr<UTLVAbilitySystemComponent> UTLVBlueprintFunctionLibrary::NativeGetTLVASCFromActor(
 	TObjectPtr<AActor> Actor)
@@ -111,4 +116,47 @@ FGameplayTag UTLVBlueprintFunctionLibrary::ComputeHitReactDirectionTag(AActor* I
 	}
 
 	return TLVGameplayTags::Shared_Event_HitReact_Light_Front_Head;
+}
+
+UTLVGameInstance* UTLVBlueprintFunctionLibrary::GetTLVGameInstance(UObject* const WorldContextObject)
+{
+	if (GEngine)
+	{
+		if (auto const World = GEngine->GetWorldFromContextObject(WorldContextObject, EGetWorldErrorMode::LogAndReturnNull))
+		{
+			return World->GetGameInstance<UTLVGameInstance>();
+		}
+	}
+	return nullptr;
+}
+
+void UTLVBlueprintFunctionLibrary::SaveCurrentGraphicSetting(FTLVGraphicSettings GraphicSettings)
+{
+	auto SaveGameObject = UGameplayStatics::CreateSaveGameObject(UTLVUISaveGame::StaticClass());
+
+	if (auto UISaveGameObject = Cast<UTLVUISaveGame>(SaveGameObject))
+	{
+		UISaveGameObject->GraphicSettings = GraphicSettings;
+		GEngine->AddOnScreenDebugMessage(123, 4,  FColor::Red, std::to_string(UISaveGameObject->GraphicSettings.ShadowQuality).c_str());
+		UGameplayStatics::SaveGameToSlot(UISaveGameObject,TLVGameplayTags::GameData_SaveGame_Slot_UI.GetTag().ToString(),0);
+	}
+}
+
+bool UTLVBlueprintFunctionLibrary::TryLoadSavedGraphicSetting(FTLVGraphicSettings& GraphicSettings)
+{
+
+	if (UGameplayStatics::DoesSaveGameExist(TLVGameplayTags::GameData_SaveGame_Slot_UI.GetTag().ToString(), 0))
+	{
+		USaveGame* SaveGameObject = UGameplayStatics::LoadGameFromSlot(TLVGameplayTags::GameData_SaveGame_Slot_UI.GetTag().ToString(),0);
+
+		if (auto UISaveGameObject = Cast<UTLVUISaveGame>(SaveGameObject))
+		{
+			GEngine->AddOnScreenDebugMessage(123, 4,  FColor::Red, std::to_string(UISaveGameObject->GraphicSettings.ShadowQuality).c_str());
+
+			GraphicSettings = UISaveGameObject->GraphicSettings;
+			return true;
+		}
+	}
+
+	return false;
 }
