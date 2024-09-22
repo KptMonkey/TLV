@@ -52,4 +52,6 @@ public:
 
 	UFUNCTION(BlueprintCallable,Category = "Warrior|FunctionLibrary")
 	static bool TryLoadSavedGraphicSetting(FTLVGraphicSettings& GraphicSettings);
+	UFUNCTION(BlueprintCallable,Category = "Warrior|FunctionLibrary", meta = (WorldContext = "WorldContextObject"))
+	static void ToggleInputMode(const UObject* WorldContextObject,ETLVInputMode InputMode);
 };

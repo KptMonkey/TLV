@@ -134,5 +134,9 @@ namespace TLVGameplayTags
 	
 	UE_DEFINE_GAMEPLAY_TAG(GameData_Level_TestGameModeMap, "GameData.Level.TestGameModeMap")
 	UE_DEFINE_GAMEPLAY_TAG(GameData_Level_MainMenuMap, "GameData.Level.MainMenuMap")
+	UE_DEFINE_GAMEPLAY_TAG(GameData_Level_1, "GameData.Level.1")
+	UE_DEFINE_GAMEPLAY_TAG(GameData_Level_2, "GameData.Level.2")
+	UE_DEFINE_GAMEPLAY_TAG(GameData_Level_3, "GameData.Level.3")
+	
 	UE_DEFINE_GAMEPLAY_TAG(GameData_SaveGame_Slot_UI, "GameData.SaveGame.Slot.UI")
 }

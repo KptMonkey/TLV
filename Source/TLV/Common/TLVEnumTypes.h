@@ -44,3 +44,10 @@ enum class ETLVGraphicSettings: uint8
 	ViewDistance,
 	VFX
 };
+
+UENUM(BlueprintType)
+enum class ETLVInputMode : uint8
+{
+	GameOnly,
+	UIOnly
+};
