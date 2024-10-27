@@ -20,6 +20,10 @@ protected:
 	void OnTargetLockTick(float DeltaTime);
 	UFUNCTION(BlueprintCallable)
 	void SwitchTarget(FGameplayTag const& SwitchDirectionTag);
+	UFUNCTION(BlueprintPure)
+	FVector CalculateWarpTargetLocation(bool& IsValid);
+	UFUNCTION(BlueprintPure)
+	bool IsInMotionWarpingDistance();
 private:
 	void TryLockOnTarget();
 	void GetAvailableActorsToLock();
@@ -50,5 +54,9 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "TLV | Target Lock")
 	UInputMappingContext* TargetLockMappingContext;
 	UPROPERTY(EditDefaultsOnly, Category = "TLV | Target Lock")
-	float TargetOffsetDistance = 0.f;	
+	float TargetOffsetDistance = 0.f;
+	UPROPERTY(EditDefaultsOnly, Category = "TLV | Motion Warping")
+	float WarpTargetLocationOffset = 180.f;
+	UPROPERTY(EditDefaultsOnly, Category = "TLV | Motion Warping")
+	float MotionWarpingDistance = 700.f;
 };

@@ -36,8 +36,23 @@ void UTLVHeroGameplayAbilityTargetLock::OnTargetLockTick(float DeltaTime)
 	UTLVBlueprintFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(), TLVGameplayTags::Shared_Status_Death)
 	)
 	{
-		CancelTargetLockAbility();
-		return;
+		
+		GetAvailableActorsToLock();
+		TObjectPtr<AActor> NextTarget = nullptr;
+		for (auto const Actor : AvailableActorsToLock)
+		{
+			if 	(UTLVBlueprintFunctionLibrary::NativeDoesActorHaveTag(Actor,TLVGameplayTags::Shared_Status_Death)) continue;
+			NextTarget = Actor;
+			break;
+		}
+		if (!NextTarget)
+		{
+			CancelTargetLockAbility();
+			ResetTargetLockMappingContext();
+			CleanUp();
+			return;
+		}
+			CurrentLockedActor = NextTarget;
 	}
 
 	const bool bShouldOverrideRotation = !UTLVBlueprintFunctionLibrary::NativeDoesActorHaveTag(GetHeroCharacterFromActorInfo(),TLVGameplayTags::Player_Status_Dodge);
@@ -81,6 +96,32 @@ void UTLVHeroGameplayAbilityTargetLock::SwitchTarget(FGameplayTag const& SwitchD
 	}
 }
 
+FVector UTLVHeroGameplayAbilityTargetLock::CalculateWarpTargetLocation(bool& IsValid)
+{
+	IsValid = false;
+	if (!CurrentLockedActor) return {};
+
+	if (!GetHeroCharacterFromActorInfo()) return {};
+
+	IsValid = true;
+	auto const HeroLocation = GetHeroCharacterFromActorInfo()->GetActorLocation();
+	auto const TargetLocation = CurrentLockedActor->GetActorLocation();
+
+	auto const OffsetDirection = HeroLocation - TargetLocation;
+	
+	return OffsetDirection.GetSafeNormal() * WarpTargetLocationOffset + TargetLocation;
+}
+
+bool UTLVHeroGameplayAbilityTargetLock::IsInMotionWarpingDistance()
+{
+	if (!CurrentLockedActor) return false;
+	auto const HeroLocation = GetHeroCharacterFromActorInfo()->GetActorLocation();
+	auto const TargetLocation = CurrentLockedActor->GetActorLocation();
+
+	auto const HeroTargetDirection = HeroLocation - TargetLocation;
+	return HeroTargetDirection.Length() < MotionWarpingDistance;
+}
+
 void UTLVHeroGameplayAbilityTargetLock::TryLockOnTarget()
 {
 	GetAvailableActorsToLock();
@@ -92,11 +133,7 @@ void UTLVHeroGameplayAbilityTargetLock::TryLockOnTarget()
 
 	CurrentLockedActor = GetNearestTargetFromAvailableActors(AvailableActorsToLock);
 
-	if (CurrentLockedActor)
-	{
-				GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, CurrentLockedActor->GetActorNameOrLabel());
-	}
-	else
+	if (!CurrentLockedActor)
 	{
 		CancelTargetLockAbility();
 	}
@@ -129,8 +166,6 @@ void UTLVHeroGameplayAbilityTargetLock::GetAvailableActorsToLock()
 			if (HitActor != GetHeroCharacterFromActorInfo())
 			{
 				AvailableActorsToLock.AddUnique(HitActor);
-
-				GEngine->AddOnScreenDebugMessage(-1, 2, FColor::Red, HitActor->GetActorNameOrLabel());
 			}
 		}
 	}
