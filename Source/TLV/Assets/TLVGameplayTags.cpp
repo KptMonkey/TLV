@@ -71,6 +71,7 @@ namespace TLVGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Toggle, "InputTag.Toggle")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_Toggle_TargetLock, "InputTag.Toggle.TargetLock")
 	UE_DEFINE_GAMEPLAY_TAG(InputTag_SwitchTarget, "InputTag.SwitchTarget")
+	UE_DEFINE_GAMEPLAY_TAG(InputTag_Paired_Attack, "InputTag.Paired.Attack")
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Equip_Axe, "Player.Event.Equip.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Event_Unequip_Axe, "Player.Event.Unequip.Axe")
@@ -85,12 +86,14 @@ namespace TLVGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Hit_Pause, "Player.Ability.Hit.Pause")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Dodge, "Player.Ability.Dodge")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_TargetLock, "Player.Ability.TargetLock")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Paired_Attack, "Player.Ability.Paired.Attack")
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_Axe, "Player.Weapon.Axe")
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_JumpToFinisher, "Player.Status.JumpToFinisher")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Dodge, "Player.Status.Dodge")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_TargetLock, "Player.Status.TargetLock")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Paired_Attack, "Player.Status.Paired.Attack")
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_SetByCaller_AttackType_Light, "Player.SetByCaller.AttackType.Light")
 	UE_DEFINE_GAMEPLAY_TAG(Player_SetByCaller_AttackType_Heavy, "Player.SetByCaller.AttackType.Heavy")
@@ -115,9 +118,10 @@ namespace TLVGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Heavy_Right_Head_Up, "Shared.Event.HitReact.Heavy.Right.Head.Up")
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_HitReact_Heavy_Right_Torso, "Shared.Event.HitReact.Heavy.Right.Torso")
 
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Event_Paired_Animation, "Shared.Event.Paired.Animation")
+
+	
 	UE_DEFINE_GAMEPLAY_TAG(Shared_SetByCaller_BaseDamage, "Shared.SetByCaller.BaseDamage")
-
-
 	
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Ability_Melee, "Enemy.Ability.Melee")
 
@@ -125,9 +129,16 @@ namespace TLVGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Ability_Death, "Shared.Ability.Death")
 
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Death, "Shared.Status.Death")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Hit_Front_Light, "Shared.Status.Hit.Front.Light")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Hit_Left_Light, "Shared.Status.Hit.Left.Light")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Hit_Right_Light, "Shared.Status.Hit.Right.Light")
 	
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Hit_Front_Heavy, "Shared.Status.Hit.Front.Heavy")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Hit_Right_Heavy, "Shared.Status.Hit.Right.Heavy")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Hit_Left_Heavy, "Shared.Status.Hit.Left.Heavy")
+
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Status_Strafing, "Enemy.Status.Strafing")
-	UE_DEFINE_GAMEPLAY_TAG(Enemy_Status_Under_Attack, "Enemy.Status.Unter.Attack")
+	UE_DEFINE_GAMEPLAY_TAG(Enemy_Status_Under_Attack, "Enemy.Status.Under.Attack")
 
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon_LeftHand, "Enemy.Weapon.LeftHand")
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Weapon_RightHand, "Enemy.Weapon.RightHand")

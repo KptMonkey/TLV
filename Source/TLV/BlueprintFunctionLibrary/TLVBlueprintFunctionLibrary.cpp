@@ -35,7 +35,6 @@ void UTLVBlueprintFunctionLibrary::RemoveGameplayTagFromActor(AActor* Actor, FGa
 {
 	auto const ASC = NativeGetTLVASCFromActor(Actor);
 	if (!ASC->HasMatchingGameplayTag(TagToRemove)) return;
-
 	ASC->RemoveLooseGameplayTag(TagToRemove);
 }
 

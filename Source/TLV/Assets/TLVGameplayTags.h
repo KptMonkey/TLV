@@ -37,7 +37,8 @@ namespace TLVGameplayTags
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Toggle)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Toggle_TargetLock)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_SwitchTarget)
-	
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Paired_Attack)
+
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Equip_Axe)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Unequip_Axe)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Attack_Melee_Light_Axe)
@@ -45,6 +46,7 @@ namespace TLVGameplayTags
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Hit_Pause)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Dodge)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_TargetLock)
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Ability_Paired_Attack)
 
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_Equip_Axe)	
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Event_Unequip_Axe)	
@@ -57,6 +59,7 @@ namespace TLVGameplayTags
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_JumpToFinisher)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_Dodge)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_TargetLock)
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_Status_Paired_Attack)
 
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_SetByCaller_AttackType_Light)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Player_SetByCaller_AttackType_Heavy)
@@ -82,6 +85,9 @@ namespace TLVGameplayTags
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_HitReact_Heavy_Right_Head_Down)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_HitReact_Heavy_Right_Torso)
 
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Event_Paired_Animation)
+
+
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_SetByCaller_BaseDamage)
 	
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Ability_Melee)
@@ -90,7 +96,14 @@ namespace TLVGameplayTags
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_Death)
 
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Death)
-	
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Hit_Front_Light)
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Hit_Left_Light)
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Hit_Right_Light)
+
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Hit_Front_Heavy)
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Hit_Left_Heavy)
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Hit_Right_Heavy)
+
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Status_Strafing)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Status_Under_Attack)
 
