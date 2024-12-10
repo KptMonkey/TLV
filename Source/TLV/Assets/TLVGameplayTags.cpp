@@ -127,6 +127,7 @@ namespace TLVGameplayTags
 
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Ability_HitReact, "Shared.Ability.HitReact")
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Ability_Death, "Shared.Ability.Death")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Ability_Death_Finisher, "Shared.Ability.Death.Finisher")
 
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Death, "Shared.Status.Death")
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Hit_Front_Light, "Shared.Status.Hit.Front.Light")
@@ -136,6 +137,7 @@ namespace TLVGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Hit_Front_Heavy, "Shared.Status.Hit.Front.Heavy")
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Hit_Right_Heavy, "Shared.Status.Hit.Right.Heavy")
 	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Hit_Left_Heavy, "Shared.Status.Hit.Left.Heavy")
+	UE_DEFINE_GAMEPLAY_TAG(Shared_Status_Hit_Was_Attacked, "Shared.Status.Hit.Was.Attacked")
 
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Status_Strafing, "Enemy.Status.Strafing")
 	UE_DEFINE_GAMEPLAY_TAG(Enemy_Status_Under_Attack, "Enemy.Status.Under.Attack")

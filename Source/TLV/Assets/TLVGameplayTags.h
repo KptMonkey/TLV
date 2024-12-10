@@ -94,6 +94,7 @@ namespace TLVGameplayTags
 
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_HitReact)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_Death)
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Ability_Death_Finisher)
 
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Death)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Hit_Front_Light)
@@ -103,6 +104,7 @@ namespace TLVGameplayTags
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Hit_Front_Heavy)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Hit_Left_Heavy)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Hit_Right_Heavy)
+	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shared_Status_Hit_Was_Attacked)
 
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Status_Strafing)
 	TLV_API UE_DECLARE_GAMEPLAY_TAG_EXTERN(Enemy_Status_Under_Attack)
