@@ -83,12 +83,22 @@ namespace TLVGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Unequip_Axe, "Player.Ability.Unequip.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Melee_Light_Axe, "Player.Ability.Attack.Melee.Light.Axe")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Melee_Heavy_Axe, "Player.Ability.Attack.Melee.Heavy.Axe")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Melee_Light_Stick, "Player.Ability.Attack.Melee.Light.Stick")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Melee_Heavy_Stick, "Player.Ability.Attack.Melee.Heavy.Stick")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Melee_Light_Saw, "Player.Ability.Attack.Melee.Light.Saw")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Melee_Heavy_Saw, "Player.Ability.Attack.Melee.Heavy.Saw")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Melee_Light_Sword, "Player.Ability.Attack.Melee.Light.Sword")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Attack_Melee_Heavy_Sword, "Player.Ability.Attack.Melee.Heavy.Sword")
+	
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Hit_Pause, "Player.Ability.Hit.Pause")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Dodge, "Player.Ability.Dodge")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_TargetLock, "Player.Ability.TargetLock")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Ability_Paired_Attack, "Player.Ability.Paired.Attack")
 
+	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_Stick, "Player.Weapon.Stick")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_Saw, "Player.Weapon.Saw")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_Axe, "Player.Weapon.Axe")
+	UE_DEFINE_GAMEPLAY_TAG(Player_Weapon_Sword, "Player.Weapon.Sword")
 
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_JumpToFinisher, "Player.Status.JumpToFinisher")
 	UE_DEFINE_GAMEPLAY_TAG(Player_Status_Dodge, "Player.Status.Dodge")

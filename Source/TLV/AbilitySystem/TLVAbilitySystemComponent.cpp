@@ -33,7 +33,7 @@ void UTLVAbilitySystemComponent::RemoveCharacterAbilities(
 		auto GameplayAbilitySpec = FGameplayAbilitySpec(Ability, 1);
 		if (auto const TLVAbility = Cast<UTLVGameplayAbility>(GameplayAbilitySpec.Ability))
 		{
-			GameplayAbilitySpec.DynamicAbilityTags.AddTag(TLVAbility->StartupInputTag);
+			GameplayAbilitySpec.DynamicAbilityTags.RemoveTag(TLVAbility->StartupInputTag);
 			ClearAbility(GameplayAbilitySpec.Handle);
 		}
 	}

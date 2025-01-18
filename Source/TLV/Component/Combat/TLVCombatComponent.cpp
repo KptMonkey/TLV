@@ -17,6 +17,7 @@ void UTLVCombatComponent::RegisterSpawnedWeapon(FGameplayTag WeaponTagToRegister
 
 	WeaponToRegister->OnHitTarget.BindUObject(this, &ThisClass::OnHitTargetActor);
 	WeaponToRegister->OnPulledFromTarget.BindUObject(this, &ThisClass::OnPulledFromTargetActor);
+	CarriedWeaponTag = WeaponTagToRegister;
 	if (RegisterEquippedWeapon)
 	{
 		EquippedWeaponTag = WeaponTagToRegister;

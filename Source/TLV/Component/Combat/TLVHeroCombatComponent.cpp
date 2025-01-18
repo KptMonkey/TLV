@@ -4,6 +4,7 @@
 #include "TLVHeroCombatComponent.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
+#include "K2Node_SpawnActorFromClass.h"
 #include "TLV/Actor/TLVMeleeWeapon.h"
 #include "TLV/Assets/TLVGameplayTags.h"
 
@@ -21,6 +22,16 @@ ATLVMeleeWeapon* UTLVHeroCombatComponent::GetHeroEquippedWeapon() const
 float UTLVHeroCombatComponent::GetHeroEquippedWeaponDamageLevel(int Level) const
 {
 	return GetHeroEquippedWeapon()->HeroWeaponData.WeaponBaseDamage.GetValueAtLevel(Level);
+}
+
+FGameplayTag UTLVHeroCombatComponent::DropCarriedWeapon()
+{
+	auto const CarriedWeapon = CarriedWeapons.Find(CarriedWeaponTag);
+	if (!CarriedWeapon) return CarriedWeaponTag;
+	
+	CarriedWeapon->Get()->Destroy();
+	CarriedWeapons.Empty();
+	return CarriedWeaponTag;
 }
 
 void UTLVHeroCombatComponent::OnHitTargetActor(AActor* TargetActor)

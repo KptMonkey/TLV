@@ -43,7 +43,8 @@ public:
 	FGameplayTag EquippedWeaponTag;
 protected:
 	TArray<TObjectPtr<AActor>> OverlappedActors;
-private:
 	TMap<FGameplayTag, TObjectPtr<ATLVMeleeWeapon>> CarriedWeapons;
+	FGameplayTag CarriedWeaponTag;
+private:
 	TMap<FGameplayTag, TObjectPtr<ATLVMeleeHand>> Hands;
 };

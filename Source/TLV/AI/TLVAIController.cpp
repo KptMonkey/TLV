@@ -37,10 +37,15 @@ ETeamAttitude::Type ATLVAIController::GetTeamAttitudeTowards(const AActor& Other
 	}
 	return ETeamAttitude::Friendly;
 }
-
 void ATLVAIController::BeginPlay()
 {
 	Super::BeginPlay();
+
+}
+
+void ATLVAIController::OnPossess(APawn* InPawn)
+{
+	Super::OnPossess(InPawn);
 	if (auto CrowdComp = Cast<UCrowdFollowingComponent>(GetPathFollowingComponent()))
 	{
 		CrowdComp->SetCrowdSimulationState(bEnableDetourCrowdAvoidance ? ECrowdSimulationState::Enabled : ECrowdSimulationState::Disabled);

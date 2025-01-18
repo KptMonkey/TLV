@@ -17,7 +17,9 @@ class TLV_API UTLVAbilitySystemComponent : public UAbilitySystemComponent
 	GENERATED_BODY()
 public:
 	void AbilityActorInfoSet();
+	UFUNCTION(BlueprintCallable, Category= "TLV | Ability")
 	void AddCharacterAbilities(TArray<TSubclassOf<UGameplayAbility>> const& GameplayAbilities);
+	UFUNCTION(BlueprintCallable, Category= "TLV | Ability")
 	void RemoveCharacterAbilities(TArray<TSubclassOf<UGameplayAbility>> const& GameplayAbilities);
 	void AbilityInputTagHeld(FGameplayTag const& InputTag);
 	void AbilityInputTagReleasd(FGameplayTag const& InputTag);

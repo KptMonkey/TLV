@@ -22,6 +22,8 @@ public:
 	ATLVMeleeWeapon* GetHeroEquippedWeapon() const;
 	UFUNCTION(BlueprintCallable, Category="TLV | Combat")
 	float GetHeroEquippedWeaponDamageLevel(int Level) const;
+	UFUNCTION(BlueprintCallable, Category="TLV | Combat")
+	FGameplayTag DropCarriedWeapon();
 	virtual void OnHitTargetActor(AActor* TargetActor) override;
 	virtual void OnPulledFromTargetActor(AActor* TargetActor) override;
 	
