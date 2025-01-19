@@ -27,6 +27,8 @@ public:
 	FVector AimOffset = {0.f, 0.f, 0.f};
 	UPROPERTY(BlueprintReadOnly, Category="Weapon")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
+	UPROPERTY(BlueprintReadOnly)
+	bool bIsDead = false;
 private:
 	void CalculateTransformationToAttachLeftHandToWeapon();
 	void UpdateProjectileWeaponAttributes();

@@ -4,7 +4,6 @@
 #include "TLVHeroCombatComponent.h"
 
 #include "AbilitySystemBlueprintLibrary.h"
-#include "K2Node_SpawnActorFromClass.h"
 #include "TLV/Actor/TLVMeleeWeapon.h"
 #include "TLV/Assets/TLVGameplayTags.h"
 

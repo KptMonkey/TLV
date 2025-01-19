@@ -13,15 +13,15 @@ void UTLVCharacterAnimInstance::NativeUpdateAnimation(float DeltaTime)
 
 //	CalculateTransformationToAttachLeftHandToWeapon();
 //	UpdateProjectileWeaponAttributes();
-	if (Character->Weapon)
-	{
+//	if (Character->Weapon)
+	//{
 		// Draw Debug Line
-		const FVector SocketLocation = Character->Weapon->GetSocketLocation("SpawnProjectile");
-		auto const SocketRotation = Character->Weapon->GetSocketRotation("SpawnProjectile");
-		auto const Direction = SocketRotation.Quaternion().GetRightVector();
-		DrawDebugLine(GetWorld(), SocketLocation, SocketLocation + Direction * 10000, FColor::Green);
-		GEngine->AddOnScreenDebugMessage(1233, 4, FColor::Orange, Character->GetVelocity().ToString());
-	}
+		// const FVector SocketLocation = Character->Weapon->GetSocketLocation("SpawnProjectile");
+		// auto const SocketRotation = Character->Weapon->GetSocketRotation("SpawnProjectile");
+		// auto const Direction = SocketRotation.Quaternion().GetRightVector();
+		// DrawDebugLine(GetWorld(), SocketLocation, SocketLocation + Direction * 10000, FColor::Green);
+		// GEngine->AddOnScreenDebugMessage(1233, 4, FColor::Orange, Character->GetVelocity().ToString());
+//	}
 }
 
 void UTLVCharacterAnimInstance::NativeInitializeAnimation()
@@ -39,7 +39,9 @@ void UTLVCharacterAnimInstance::NativeThreadSafeUpdateAnimation(float DeltaSecon
 	bHasAcceleration = OwningMovementComponent->GetCurrentAcceleration().SizeSquared2D()>0.f;
 	GroundSpeed = Character->GetVelocity().Size2D();
 	LocomotionDirection = UKismetAnimationLibrary::CalculateDirection(Character->GetVelocity(),Character->GetActorRotation());
+	bIsDead = Character->bIsDead;
 }
+
 
 // Weapon needs a socket called "LeftHandSocket"
 void UTLVCharacterAnimInstance::CalculateTransformationToAttachLeftHandToWeapon()

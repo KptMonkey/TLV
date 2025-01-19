@@ -37,6 +37,8 @@ public:
 	USkeletalMeshComponent* GetAnimatedMesh() const;
 	FORCEINLINE TObjectPtr<UTLVAttributeSet> GetTLVAttributeSet() const { return AttributeSet;}
 	virtual TObjectPtr<UTLVCombatComponent> GetCombatComponent() const override;
+	UPROPERTY(BlueprintReadWrite, Category= "TLV | Vitals")
+	bool  bIsDead = false;
 protected:
 	virtual void BeginPlay() override;
 	virtual void PossessedBy(AController* NewController) override;
