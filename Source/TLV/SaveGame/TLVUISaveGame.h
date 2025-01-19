@@ -18,22 +18,23 @@ public:
 	UPROPERTY(BlueprintReadOnly)
 	FTLVGraphicSettings GraphicSettings;
 	UPROPERTY(BlueprintReadOnly)
-	int AntiAliasing = 1;
+	int AntiAliasing = 2;
 	UPROPERTY(BlueprintReadOnly)
-	int ShadowQuality = 1;
+	int ShadowQuality = 2;
 	UPROPERTY(BlueprintReadWrite)
-	int ShadingQuality = 1;
+	int ShadingQuality = 2;
 	UPROPERTY(BlueprintReadWrite)
-	int TextureQuality = 1;
+	int TextureQuality = 2;
 	UPROPERTY(BlueprintReadWrite)
-	int ViewDistanceQuality = 1;
+	int ViewDistanceQuality = 2;
 	UPROPERTY(BlueprintReadWrite)
-	int VFXQuality = 1;
+	int VFXQuality = 2;
 	UPROPERTY(BlueprintReadWrite)
-	int FoliageQuality = 1;
+	int FoliageQuality = 2;
 	UPROPERTY(BlueprintReadWrite)
-	int GIQuality = 1;
+	int GIQuality = 2;
 	UPROPERTY(BlueprintReadWrite)
-	int ReflectionQuality = 1;
-	
+	int ReflectionQuality = 2;
+	UPROPERTY(BlueprintReadWrite)
+	int FullScreen = 2;	
 };

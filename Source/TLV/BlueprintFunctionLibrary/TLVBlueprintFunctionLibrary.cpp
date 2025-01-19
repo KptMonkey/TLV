@@ -136,7 +136,6 @@ void UTLVBlueprintFunctionLibrary::SaveCurrentGraphicSetting(FTLVGraphicSettings
 	if (auto UISaveGameObject = Cast<UTLVUISaveGame>(SaveGameObject))
 	{
 		UISaveGameObject->GraphicSettings = GraphicSettings;
-		GEngine->AddOnScreenDebugMessage(123, 4,  FColor::Red, std::to_string(UISaveGameObject->GraphicSettings.ShadowQuality).c_str());
 		UGameplayStatics::SaveGameToSlot(UISaveGameObject,TLVGameplayTags::GameData_SaveGame_Slot_UI.GetTag().ToString(),0);
 	}
 }
@@ -150,8 +149,6 @@ bool UTLVBlueprintFunctionLibrary::TryLoadSavedGraphicSetting(FTLVGraphicSetting
 
 		if (auto UISaveGameObject = Cast<UTLVUISaveGame>(SaveGameObject))
 		{
-			GEngine->AddOnScreenDebugMessage(123, 4,  FColor::Red, std::to_string(UISaveGameObject->GraphicSettings.ShadowQuality).c_str());
-
 			GraphicSettings = UISaveGameObject->GraphicSettings;
 			return true;
 		}

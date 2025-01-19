@@ -52,7 +52,6 @@ void UTLVGEExecCalc_DamageDealt::Execute_Implementation(const FGameplayEffectCus
 	EvaluateParameters.TargetTags = ExecutionParams.GetOwningSpec().CapturedTargetTags.GetAggregatedTags();
 	float SourceAttackPower = 0.f;
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetTLVDamageCapture().AttackPowerDef, EvaluateParameters, SourceAttackPower);
-	GEngine->AddOnScreenDebugMessage(1, 4, FColor::Emerald, FString(std::to_string(SourceAttackPower).c_str()));
 
 	float BaseDamage = 0.f;
 	int32 UsedLightAttckComboCount = 0;
@@ -78,16 +77,13 @@ void UTLVGEExecCalc_DamageDealt::Execute_Implementation(const FGameplayEffectCus
 
 	float TargetDefensePower = 0.f;
 	ExecutionParams.AttemptCalculateCapturedAttributeMagnitude(GetTLVDamageCapture().DefensePowerDef,EvaluateParameters,TargetDefensePower);
-	GEngine->AddOnScreenDebugMessage(2, 4, FColor::Emerald, FString(std::to_string(TargetDefensePower).c_str()));
-	/*Debug::Print(TEXT("TargetDefensePower"),TargetDefensePower);*/
 
 	if (UsedLightAttckComboCount != 0)
 	{
 		const float DamageIncreasePercentLight = (UsedLightAttckComboCount - 1) * 0.05f + 1.f;
 
 		BaseDamage *= DamageIncreasePercentLight;
-		GEngine->AddOnScreenDebugMessage(3, 4, FColor::Emerald, FString(std::to_string(BaseDamage).c_str()));
-		/*Debug::Print(TEXT("ScaledBaseDamageLight"),BaseDamage);*/
+		GEngine->AddOnScreenDebugMessage(3, 4, FColor::Black, FString(std::to_string(BaseDamage).c_str()));
 	}
 
 	if (UsedHeavyAttackComboCount != 0)
@@ -95,14 +91,12 @@ void UTLVGEExecCalc_DamageDealt::Execute_Implementation(const FGameplayEffectCus
 		const float DamageIncreasePercentHeavy = UsedHeavyAttackComboCount * 0.15f + 1.f;
 
 		BaseDamage *= DamageIncreasePercentHeavy;
-		GEngine->AddOnScreenDebugMessage(4, 4, FColor::Emerald, FString(std::to_string(BaseDamage).c_str()));
+		GEngine->AddOnScreenDebugMessage(4, 4, FColor::Red, FString(std::to_string(BaseDamage).c_str()));
 
-		/*Debug::Print(TEXT("ScaledBaseDamageHeavy"),BaseDamage);*/
 	}
 
 	const float FinalDamageDone = BaseDamage * SourceAttackPower / TargetDefensePower;
-	GEngine->AddOnScreenDebugMessage(5, 4, FColor::Emerald, FString(std::to_string(FinalDamageDone).c_str()));
-	/*Debug::Print(TEXT("FinalDamageDone"),FinalDamageDone);*/
+	GEngine->AddOnScreenDebugMessage(5, 4, FColor::Orange, FString(std::to_string(FinalDamageDone).c_str()));
 
 	if (FinalDamageDone > 0.f)
 	{
