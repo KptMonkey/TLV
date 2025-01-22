@@ -54,6 +54,14 @@ public:
 	FGameplayAttributeData MaxHealth;
 	ATTRIBUTE_ACCESSORS(UTLVAttributeSet, MaxHealth);
 
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health, Category = "TLV | Vital Attributes")
+	FGameplayAttributeData Stamina;
+	ATTRIBUTE_ACCESSORS(UTLVAttributeSet, Stamina);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxHealth, Category = "TLV | Vital Attributes")
+	FGameplayAttributeData MaxStamina;;
+	ATTRIBUTE_ACCESSORS(UTLVAttributeSet, MaxStamina);
+
 	UPROPERTY(BlueprintReadOnly, Category = "TLV | Damage")
 	FGameplayAttributeData AttackPower;
 	ATTRIBUTE_ACCESSORS(UTLVAttributeSet,AttackPower)

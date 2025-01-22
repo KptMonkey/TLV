@@ -19,6 +19,8 @@ UTLVAttributeSet::UTLVAttributeSet()
 	InitAttackPower(16);
 	InitDamageTaken(0);
 	InitDefensePower(10);
+    InitStamina(100);
+    InitMaxStamina(100);
 }
 
 void UTLVAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -26,6 +28,8 @@ void UTLVAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME_CONDITION_NOTIFY(UTLVAttributeSet, Health, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UTLVAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UTLVAttributeSet, Stamina, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UTLVAttributeSet, MaxStamina, COND_None, REPNOTIFY_Always);
 }
 
 void UTLVAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
@@ -36,6 +40,10 @@ void UTLVAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, f
 	{
 		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxHealth());
 	}
+	if (Attribute == GetStaminaAttribute())
+	{
+		NewValue = FMath::Clamp(NewValue, 0.f, GetMaxStamina());
+	}
 }
 
 void UTLVAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbackData& Data)
@@ -44,6 +52,12 @@ void UTLVAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallbac
 	{
 		const float NewHealth = FMath::Clamp(GetHealth(), 0.f, GetMaxHealth());
 		SetHealth(NewHealth);
+	}
+
+	if (Data.EvaluatedData.Attribute == GetStaminaAttribute())
+	{
+		const float NewStamina = FMath::Clamp(GetStamina(), 0.f, GetMaxStamina());
+		SetStamina(NewStamina);
 	}
 
 	if (Data.EvaluatedData.Attribute == GetDamageTakenAttribute())

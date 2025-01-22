@@ -89,7 +89,7 @@ void UTLVGEExecCalc_DamageDealt::Execute_Implementation(const FGameplayEffectCus
 	if (UsedHeavyAttackComboCount != 0)
 	{
 		const float DamageIncreasePercentHeavy = UsedHeavyAttackComboCount * 0.15f + 1.f;
-
+	    BaseDamage += 5.f;
 		BaseDamage *= DamageIncreasePercentHeavy;
 		GEngine->AddOnScreenDebugMessage(4, 4, FColor::Red, FString(std::to_string(BaseDamage).c_str()));
 
